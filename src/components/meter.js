@@ -116,7 +116,7 @@ export const colors = {
             colorSetting("sch", "Scholar", "#7986cb"),
             colorSetting("ast", "Astrologian", "#795548"),
         ],
-        getColor: (settings, combatant) => (settings && settings[classToJob(combatant.Job)] ? settings[classToJob(combatant.Job)] : getDefaultValue(colors.class, classToJob(combatant.Job))) || "transparent"
+        getColor: (settings, combatant) => (settings && settings[classToJob(combatant.Job)] ? settings[classToJob(combatant.Job)] : getDefaultValue(colors.job, classToJob(combatant.Job))) || "transparent"
     },
     custom: {
         name: "By custom definition, transparent otherwise"
