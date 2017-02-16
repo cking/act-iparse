@@ -67,10 +67,10 @@ export default class MainWindow extends Component {
         window.removeEventListener("message", this.message)
     }
 
-    openConfigWindow() {
-        if (this.config && this.config.closed) this.config = null
-        if (!this.config) this.config = window.open("config.html", "_blank", "height=560,width=720")
-        else this.config.focus()
+    openConfigWindow(ctx, ev) {
+        if (ctx.config && ctx.config.closed) ctx.config = null
+        if (!ctx.config) ctx.config = window.open("config.html", "_blank", "height=560,width=720")
+        ctx.config.focus()
     }
 
     render() {
