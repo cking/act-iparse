@@ -4,7 +4,6 @@ import { linkEvent } from "inferno"
 import humane from "humane-js"
 import { Jobs } from "../util"
 import { colors, renderColorSettings, getColor, fills, getTexture, styles, getStyle } from "./meter"
-import ColorPicker from "../ui/color-picker"
 
 export default class ColorSettings extends Component {
     constructor(props) {
@@ -35,16 +34,10 @@ export default class ColorSettings extends Component {
         this.preview = window.setInterval(() => {
             this.refreshPreview()
         }, 100)
-
-        if (!this.cp) this.cp = new ColorPicker()
     }
 
     componentWillUnmount() {
         if (this.preview) window.clearInterval(this.preview)
-        if (this.cp) {
-            this.cp.destroy()
-             this.cp = null
-        }
     }
 
     refreshPreview() {
