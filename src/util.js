@@ -111,3 +111,25 @@ export function classToJob(job) {
         default: return job.toLowerCase()
     }
 }
+
+export function iconFromCombatant(abbr) {
+    const pet = abbr.match(/^(.*) \((\S+ \S+)\)$/)
+    if (!pet) return abbr
+    
+    if (pet[1] == "selene" || pet[1] == "eos") return pet[1]
+
+    if (pet[1].match(/(carbuncle|karfunkel)$/)) {
+        return "pet"
+    }
+
+    const egi = pet[1].match(/^([^-]+)-egi$/)
+    if (egi) return egi[1]
+
+    const copter = pet[1].match(/^(\S+) autoturret$/) || pet[1].match(/^selbstschuss-gyrocopter (.+)$/)
+    if (copter) {
+        if (copter[1] == "rook" || copter[1] == "läufer") return "rook"
+        return "bishop"
+    }
+
+    return "chocobo"
+}

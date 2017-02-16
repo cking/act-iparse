@@ -1,5 +1,5 @@
 import h from 'inferno-create-element'
-import { arrayToObject, jobAbbrToLong, shortenSkill } from "../util"
+import { arrayToObject, jobAbbrToLong, shortenSkill, iconFromCombatant } from "../util"
 import normat from "normat"
 const si = normat([
     ["", 1000], ["k", 1000], ["m"]
@@ -149,7 +149,7 @@ export const JobColumn = {
     },
     renderCell: (index, props, opts) => {
         const abbr = (props.Job || props.name).toLowerCase()
-        const icon = !opts.icon ? "" : <img src={"icons/" + abbr.replace(/\s+/g, "") + ".png"} style={{
+        const icon = !opts.icon ? "" : <img src={"icons/" + iconFromCombatant(abbr) + ".png"} style={{
             height: "1.5rem", width: "auto", position: "absolute", marginTop: "-0.15em"
         }} />
 
