@@ -2,12 +2,21 @@ import buble from 'rollup-plugin-buble';
 import nodeResolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import replace from "rollup-plugin-replace"
+import alias from "rollup-plugin-alias"
 
 export default {
   entry: 'src/index.js',
   dest: 'script.js',
   plugins: [
-    replace({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
+    alias({
+      "react-color": require.resolve("react-color"),
+      "reactcss": require.resolve("reactcss"),
+      'react': require.resolve('inferno-compat'),
+      'react-dom': require.resolve('inferno-compat'),
+    }),
+    replace({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    }),
     nodeResolve({
       browser: true,  // Default: false,
     }),

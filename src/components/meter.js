@@ -1,6 +1,7 @@
 import h from 'inferno-create-element'
 import { Jobs, hash, jobType, classToJob } from "../util"
 import Color from "color"
+import ColorPicker from "../ui/color-picker"
 
 const classSettingsBase = [
     {
@@ -23,7 +24,7 @@ function renderCellInput(type, def, val, ev) {
     switch (def.type) {
         case "color": return <div className="pure-control-group">
             {label}
-            <input id={type + "-" + def.key} name={type + "-" + def.key} value={value} type={def.type} onInput={ev} />
+            <ColorPicker id={type + "-" + def.key} name={type + "-" + def.key} value={value} onInput={ev} />
         </div>
     }
 }
