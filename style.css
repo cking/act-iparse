@@ -56,6 +56,10 @@ html {
     border-color: #a7d0ff;
 }
 
+#header {
+    margin-bottom: 0.5rem;
+}
+
 #header,
 .orange {
     color: #DED7BE;
