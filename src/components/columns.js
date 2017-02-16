@@ -62,7 +62,11 @@ export const NameColumn = {
     enabled: "true",
     renderHeader: opts => <div className={ opts.align }>{opts.title}</div>,
     renderCell: (index, props, opts) => {
-        const name = props.name.split(" ")
+        let pet = props.name.match(/^(.*) \((\S+ \S+)\)$/)
+        const name = pet? pet[2].split(" "): props.name.split(" ")
+        pet = pet? pet[1] + " (": ""
+        const petClose = pet? ")": ""
+
         switch (opts.abbr) {
             case "first": name[0] = name[0][0] + "."; break
             case "last": name[1] = name[1][0] + "."; break
@@ -70,7 +74,7 @@ export const NameColumn = {
                 name[0] = name[0][0] + "."
                 name[1] = name[1][0] + "."
         }
-        return <div className={ opts.align }>{name[0]} {name[1]}</div>
+        return <div className={ opts.align }>{pet}{name[0]} {name[1]}{petClose}</div>
     }
 }
 
