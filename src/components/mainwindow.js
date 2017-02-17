@@ -6,6 +6,8 @@ import Header from "./header"
 import Table from "./table"
 
 import humane from "humane-js"
+import { current as currentVersion } from "../changelog"
+
 export default class MainWindow extends Component {
     constructor(props) {
         super(props)
@@ -60,6 +62,14 @@ export default class MainWindow extends Component {
         document.addEventListener("onOverlayStateUpdate", this.overlayStateUpdate)
         document.addEventListener("onOverlayDataUpdate", this.overlayDataUpdate)
         window.addEventListener("message", this.message)
+
+        if ((window.localStorage["version"] || window.localStorage["cells"]) && window.localStorage["version"] != currentVersion) {
+            humane.log("A new version was released, check about page for details!")
+        } else if (!window.local["version"]) {
+            this.openConfigWindow(this, null)
+        }
+
+        window.localStorage["version"] = currentVersion
     }
 
     componentWillUnmount() {

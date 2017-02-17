@@ -6,6 +6,7 @@ import createHistory from "history/createHashHistory"
 import GeneralSettings from "./general-settings"
 import TableSettings from "./table-settings"
 import ColorSettings from "./color-settings"
+import { list as versionList } from "../changelog"
 
 export class ConfigWindow extends Component {
     constructor(props) {
@@ -50,6 +51,18 @@ export function AboutWindow() {
                 </a>
                 <div class="world">Cerberus</div>
             </div>
+
+            <h2 style={{ clear: "both" }}>Changelog</h2>
+            <ul>
+                {Object.keys(versionList).map(v => (
+                    <li>
+                        <strong>{v}</strong> <em>({versionList[v].date})</em>
+                        <ol>
+                            {versionList[v].changes.map(c => <li>{c}</li>)}
+                        </ol>
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }
