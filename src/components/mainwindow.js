@@ -5,6 +5,7 @@ import { linkEvent } from "inferno"
 import Header from "./header"
 import Table from "./table"
 
+import humane from "humane-js"
 export default class MainWindow extends Component {
     constructor(props) {
         super(props)
@@ -71,6 +72,7 @@ export default class MainWindow extends Component {
         if (ctx.config && ctx.config.closed) ctx.config = null
         if (!ctx.config) ctx.config = window.open("config.html", "_blank", "height=560,width=720")
         ctx.config.focus()
+        humane.log("Configuration screen opened, check your background windows")
     }
 
     render() {
