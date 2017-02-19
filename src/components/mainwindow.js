@@ -65,7 +65,7 @@ export default class MainWindow extends Component {
 
         if ((window.localStorage["version"] || window.localStorage["cells"]) && window.localStorage["version"] != currentVersion) {
             humane.log("A new version was released, check about page for details!")
-        } else if (!window.local["version"]) {
+        } else if (!window.localStorage["version"]) {
             this.openConfigWindow(this, null)
         }
 
