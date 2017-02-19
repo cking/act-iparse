@@ -6,6 +6,7 @@ export const list = {
             "Fixed missing color for lancer in job color mode",
             "Added colors for pets, companions and the limitbreak",
             "Added a new column 'True HPS'",
+            "Restyle top right button menu",
         ]
     },
     1: {

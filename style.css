@@ -37,21 +37,22 @@ html {
     box-shadow: 0 0 10px 1px #217AA2;
 }
 
-#configure {
+.btngrp {
     position: absolute;
     right: 1rem;
     top: 1rem;
-    background: transparent;
-    border-radius: 50%;
-    height: 2em;
-    width: 2em;
-    border: 2px solid #E2EBF5;
-    filter: drop-shadow(0 0 5px #217AA2);
-    color: #e2ebf5;
-    cursor: pointer;
 }
 
-#configure:hover {
+.btngrp button {
+    background: transparent;
+    height: 1.5em;
+    width: 2em;
+    color: #e2ebf5;
+    cursor: pointer;
+    border: none;
+}
+
+.btngrp button:hover {
     color: #a7d0ff;
     border-color: #a7d0ff;
 }

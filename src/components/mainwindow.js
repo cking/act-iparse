@@ -87,12 +87,14 @@ export default class MainWindow extends Component {
 
     render() {
         const resizeHandle = this.state.isLocked ? "" : (<div id="resize"></div>)
-        const configureButton = this.state.isLocked ? "" : (<button id="configure" onClick={linkEvent(this, this.openConfigWindow)}><span className="ion-gear-a"></span></button>)
+        const configureButtons = this.state.isLocked ? "" : (<div class="btngrp">
+            <button onClick={linkEvent(this, this.openConfigWindow)}><span className="ion-gear-a"></span></button>
+        </div>)
         return (
             <div>
                 <Header isActive={this.state.isActive} encounter={this.state.encounter} settings={this.state.headerSettings} />
                 <Table combatants={this.state.combatants} settings={this.state.cellsSettings} encounter={this.state.encounter} meter={this.state.meterSettings} />
-                {configureButton}
+                {configureButtons}
                 {resizeHandle}
             </div>
         )
