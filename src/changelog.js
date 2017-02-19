@@ -1,5 +1,11 @@
 export const current = 1
 export const list = {
+    "bacon": {
+        date: "2017-02-19",
+        changes: [
+            "Fixed missing color for lancer in job color mode",
+        ]
+    },
     1: {
         date: "2017-02-17",
         changes: [

@@ -104,7 +104,8 @@ export function classToJob(job) {
     switch (job.toLowerCase()) {
         case "gld": return "pld"
         case "mrd": return "war"
-        case "cnj":return "whm"
+        case "lnc": return "drg"
+        case "cnj": return "whm"
         case "acn": return "smn"
         case "thm": return "blm"
         case "arc": return "brd"
