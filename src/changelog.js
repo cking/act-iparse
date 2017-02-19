@@ -4,6 +4,7 @@ export const list = {
         date: "2017-02-19",
         changes: [
             "Fixed missing color for lancer in job color mode",
+            "Added colors for pets, companions and the limitbreak",
         ]
     },
     1: {

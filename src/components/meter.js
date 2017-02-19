@@ -1,5 +1,5 @@
 import h from 'inferno-create-element'
-import { Jobs, hash, jobType, classToJob } from "../util"
+import { Jobs, hash, jobType, classToJob, petType } from "../util"
 import Color from "color"
 import ColorPicker from "../ui/color-picker"
 
@@ -44,10 +44,28 @@ function getDefaultValue(def, key) {
     return item ? item.default : item
 }
 
+export const petColors = {
+    name: "Pets and companions",
+    title: "Job type colors",
+    settings: [
+        colorSetting("lb", "Limit break", "#BD10E0"),
+        colorSetting("choco", "Chocobos", "#444"),
+        colorSetting("egi", "Egis and Carbuncles", "#2e7d32"),
+        colorSetting("turret", "Autoturrets", "#0097a7"),
+        colorSetting("fairy", "Fairies", "#7986cb"),
+    ],
+    getColor: (settings, combatant) => (
+        settings && settings[petType(combatant.name)] ?
+            settings[petType(combatant.name)] :
+            getDefaultValue(petColors, petType(combatant.name))
+    ) || false
+}
+
 export const colors = {
     checksum: {
         name: "By character name",
-        getColor: (settings, combatant) => "hsl(" + (hash(combatant.name) + 200) % 360 + ",100%,50%)"
+        getColor: (settings, combatant) => "hsl(" + (hash(combatant.name) + 200) % 360 + ",100%,50%)",
+        noPetColors: true
     },
     random: {
         name: "Random (Epilepsy warning!)",
@@ -127,12 +145,22 @@ export const colors = {
 export function renderColorSettings(type, settings, ev) {
     if (!colors[type].settings) return
 
-    return <fieldset>
-        <legend>{colors[type].title}</legend>
-        {colors[type].settings.map(def =>
-            renderCellInput(type, def, settings ? settings[def.key] : null, ev)
-        )}
-    </fieldset>
+    return <div>
+        <fieldset>
+            <legend>{colors[type].title || colors[type].name}</legend>
+            {colors[type].settings.map(def =>
+                renderCellInput(type, def, settings ? settings[def.key] : null, ev)
+            )}
+        </fieldset>
+        {!colors[type].noPetColors ?
+            <fieldset>
+                <legend>{petColors.name}</legend>
+                {petColors.settings.map(def =>
+                    renderCellInput(type, def, settings ? settings[def.key] : null, ev)
+                )}
+            </fieldset>
+            : ""}
+    </div>
 }
 
 export function getColor(type, settings, combatant, overwrites) {
@@ -147,8 +175,11 @@ export function getColor(type, settings, combatant, overwrites) {
             classToJob(combatant.Job).match(re) ||
             (Jobs[classToJob(combatant.Job)] || "").match(re)
     }) : false
-
     if (overwrite) return overwrite.color
+    if (!colors[type].noPetColors) {
+        const petColor = petColors.getColor(settings, combatant)
+        if (petColor) return petColor
+    }
 
     return colors[type].getColor(settings, combatant)
 }

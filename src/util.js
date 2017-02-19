@@ -134,3 +134,14 @@ export function iconFromCombatant(abbr) {
 
     return "chocobo"
 }
+
+export function petType(name) {
+    const pet = name.match(/^(.*) \((\S+ \S+)\)$/)
+    if (!pet) return name == "limit break" ? "lb" : ""
+
+    if (pet[1] == "selene" || pet[1] == "eos") return "fairy"
+
+    if (pet[1].match(/(carbuncle|karfunkel|-egi)$/)) return "egi"
+    if (pet[1].match(/^(\S+) autoturret$/) || pet[1].match(/^selbstschuss-gyrocopter (.+)$/)) return "turret"
+    return "choco"
+}
