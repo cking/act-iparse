@@ -18,6 +18,7 @@ localStorage.setItem("header", JSON.stringify(Object.assign({}, {
     stats: "dps-hps",
     strongest: "",
     deaths: false,
+    customName: "YOU",
 }, jsonParseDefault(localStorage.getItem("header"), {}))))
 
 localStorage.setItem("meter", JSON.stringify(Object.assign(defaultMeterSettings(), jsonParseDefault(localStorage.getItem("meter"), {}))))

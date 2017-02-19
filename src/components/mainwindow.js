@@ -93,7 +93,7 @@ export default class MainWindow extends Component {
         return (
             <div>
                 <Header isActive={this.state.isActive} encounter={this.state.encounter} settings={this.state.headerSettings} />
-                <Table combatants={this.state.combatants} settings={this.state.cellsSettings} encounter={this.state.encounter} meter={this.state.meterSettings} />
+                <Table combatants={this.state.combatants} settings={this.state.cellsSettings} encounter={this.state.encounter} meter={this.state.meterSettings} misc={this.state.headerSettings} />
                 {configureButtons}
                 {resizeHandle}
             </div>

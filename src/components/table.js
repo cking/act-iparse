@@ -5,6 +5,14 @@ import { renderHeader, renderCell } from "./columns"
 import { getStyle } from "./meter"
 
 export default class Table extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            misc: {}
+        }
+    }
+
     renderHeader() {
         const cells = this.props.settings
 
@@ -15,9 +23,10 @@ export default class Table extends Component {
 
     renderRow(idx, combatant, encounter) {
         const cells = this.props.settings
+        const player = this.props.misc.customName == combatant.name ? "player" : ""
 
         return (
-            <div class="fable">
+            <div class={"fable " + player}>
                 <div class="meter" data-odd={idx % 2}>
                     <div style={Object.assign({ width: combatant["damage%"] }, getStyle(
                         this.props.meter.style,

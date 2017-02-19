@@ -17,6 +17,7 @@ export default class GeneralSettings extends Component {
             stats: "dps-hps",
             strongest: "",
             deaths: false,
+            customName: "YOU",
         }
 
         this.state = {
@@ -26,6 +27,7 @@ export default class GeneralSettings extends Component {
             stats: "dps-hps",
             strongest: "",
             deaths: false,
+            customName: "YOU",
         }
     }
 
@@ -37,7 +39,7 @@ export default class GeneralSettings extends Component {
 
     changeValue(ctx, ev) {
         const state = {}
-        state[ev.target.id] = ev.target.checked !== undefined ? ev.target.checked : ev.target.value
+        state[ev.target.id] = ev.target.type === "checkbox" || ev.target.type === "radio"? ev.target.checked : ev.target.value
         ctx.setState(state)
     }
 
@@ -82,6 +84,14 @@ export default class GeneralSettings extends Component {
                 </div>
 
                 <form class="pure-form pure-form-aligned" onsubmit={linkEvent(this, this.saveForm)} method="post">
+                    <fieldset>
+                        <legend>Miscellaneous</legend>
+
+                        <div className="pure-control-group">
+                            <label for="customName">Your ACT Name</label>
+                            <input id="customName" type="text" name="customName" value={this.state.customName} onInput={linkEvent(this, this.changeValue)} />
+                        </div>
+                    </fieldset>
                     <fieldset>
                         <legend>Header</legend>
 
