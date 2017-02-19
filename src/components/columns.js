@@ -444,6 +444,38 @@ export const HPSColumn = {
     renderCell: (index, props, opts) => <div className={"fmedi " + opts.align + (opts.monospace ? " mono" : "")}>{props.ENCHPS}</div>
 }
 
+export const THPSColumn = {
+    key: "thps",
+    name: "True HPS",
+    description: "Display the heal per second, adjusted to exclude the Over Heal",
+    options: [
+        {
+            key: "title",
+            name: "Title",
+            description: "The column title",
+            default: "THPS",
+            type: "text",
+        }, {
+            key: "align",
+            name: "Align",
+            description: "Text align in the cell",
+            default: "fr",
+            type: "option",
+            values: { fl: "Left", fc: "Center", fr: "Right" }
+        }, {
+            key: "monospace",
+            name: "Monospaced",
+            description: "Use a monospaced, fixed-width font",
+            default: true,
+            type: "checkbox"
+        }
+        // TODO highlight low, mid, high?
+    ],
+    enabled: "true",
+    renderHeader: opts => <div className={"fmedi " + opts.align}>{opts.title}</div>,
+    renderCell: (index, props, opts) => <div className={"fmedi " + opts.align + (opts.monospace ? " mono" : "")}>{props.ENCHPS / 100 * parseInt(props.OverHealPct)}</div>
+}
+
 export const HealColumn = {
     key: "heal",
     name: "Heal",
@@ -835,7 +867,7 @@ export const BlockColumn = {
 const cells = [
     IndexColumn, NameColumn, DeathColumn, JobColumn, AccuracyColumn, MissNumColumn,
     DPSColumn, DamageColumn, MaxHitColumn, CritHitColumn,
-    HPSColumn, HealColumn, OverhealColumn, MaxHealColumn, CritHealColumn,
+    HPSColumn, THPSColumn, HealColumn, OverhealColumn, MaxHealColumn, CritHealColumn,
     TDPSColumn, TakenColumn, RHPSColumn, HealReceivedColumn, ParryColumn, BlockColumn,
 ]
 export function defaultCellSettings() {
