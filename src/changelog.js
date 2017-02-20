@@ -1,5 +1,11 @@
 export const current = 1
 export const list = {
+    "inkognito": {
+        date: "2017-02-20",
+        changes: [
+            "Gave ROG a color",
+        ]
+    },
     "bacon": {
         date: "2017-02-19",
         changes: [

@@ -109,6 +109,7 @@ export function classToJob(job) {
         case "acn": return "smn"
         case "thm": return "blm"
         case "arc": return "brd"
+        case "rog": return "nin"
         default: return job.toLowerCase()
     }
 }
