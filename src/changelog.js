@@ -4,6 +4,7 @@ export const list = {
         date: "2017-02-20",
         changes: [
             "Gave ROG a color",
+            "Limit break now in color",
         ]
     },
     "bacon": {

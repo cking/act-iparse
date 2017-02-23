@@ -138,7 +138,7 @@ export function iconFromCombatant(abbr) {
 
 export function petType(name) {
     const pet = name.match(/^(.*) \((\S+ \S+)\)$/)
-    if (!pet) return name == "limit break" ? "lb" : ""
+    if (!pet) return name.toLowerCase() == "limit break" ? "lb" : ""
 
     if (pet[1] == "selene" || pet[1] == "eos") return "fairy"
 
