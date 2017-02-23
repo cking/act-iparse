@@ -1,14 +1,16 @@
 export const current = 1
-export const list = {
-    "inkognito": {
-        date: "2017-02-20",
+export const list = [
+    {
+        name: "inkognito",
+        date: "2017-02-23",
         changes: [
             "Gave ROG a color",
             "Limit break now in color",
             "Transparency for meter is now a thing"
         ]
     },
-    "bacon": {
+    {
+        name: "bacon",
         date: "2017-02-19",
         changes: [
             "Fixed missing color for lancer in job color mode",
@@ -18,7 +20,8 @@ export const list = {
             "Option to highlight yourself",
         ]
     },
-    1: {
+    {
+        name: "1",
         date: "2017-02-17",
         changes: [
             "Added a working color picker",
@@ -28,4 +31,4 @@ export const list = {
             "Name parsing was buggy, adjusted and tweaked parser",
         ]
     }
-}
+]

@@ -54,11 +54,11 @@ export function AboutWindow() {
 
             <h2 style={{ clear: "both" }}>Changelog</h2>
             <ul>
-                {Object.keys(versionList).map(v => (
+                {versionList.map(v => (
                     <li>
-                        <strong>{v}</strong> <em>({versionList[v].date})</em>
+                        <strong>{v.name}</strong> <em>({v.date})</em>
                         <ol>
-                            {versionList[v].changes.map(c => <li>{c}</li>)}
+                            {v.changes.map(c => <li>{c}</li>)}
                         </ol>
                     </li>
                 ))}
