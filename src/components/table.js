@@ -27,7 +27,7 @@ export default class Table extends Component {
 
         return (
             <div class={"fable " + player}>
-                <div class="meter" data-odd={idx % 2}>
+                <div class="meter" data-odd={idx % 2} style={{opacity: (100 - this.props.meter.transparency) / 100}}>
                     <div style={Object.assign({ width: combatant["damage%"] }, getStyle(
                         this.props.meter.style,
                         this.props.meter.fill,

@@ -15,6 +15,7 @@ export default class ColorSettings extends Component {
             cgen: "checksum",
             exampleName: "Vanthia Orcus",
             exampleJob: "",
+            transparency: 0,
 
             color: {
                 custom: []
@@ -123,6 +124,11 @@ export default class ColorSettings extends Component {
                             <select id="fill" name="fill" onChange={linkEvent(this, this.changeValue)}>
                                 {Object.keys(fills).map(key => <option value={key} selected={this.state.fill == key}>{fills[key].name}</option>)}
                             </select>
+                        </div>
+
+                        <div className="pure-control-group">
+                            <label for="fill">Choose transparency</label>
+                            <input type="range" min="0" max="100" id="transparency" name="transparency" value={this.state.transparency} onInput={linkEvent(this, this.changeValue)} />
                         </div>
 
                         <div className="pure-control-group">

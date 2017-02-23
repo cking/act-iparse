@@ -254,6 +254,7 @@ export function defaultMeterSettings() {
         cgen: Object.keys(colors)[0],
         fill: Object.keys(fills)[0],
         style: Object.keys(styles)[0],
+        transparency: 0,
         color: { custom: [] }
     }
 }

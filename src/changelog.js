@@ -5,6 +5,7 @@ export const list = {
         changes: [
             "Gave ROG a color",
             "Limit break now in color",
+            "Transparency for meter is now a thing"
         ]
     },
     "bacon": {
