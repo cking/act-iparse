@@ -38,6 +38,10 @@ export default class MainWindow extends Component {
             encounter: e.detail.Encounter,
             combatants: e.detail.Combatant,
         })
+
+        if (this.socket) {
+            this.socket.send(JSON.stringify(e.detail))
+        }
     }
 
     message(e) {
@@ -45,6 +49,13 @@ export default class MainWindow extends Component {
             const settings = {}
             settings[e.data.reload + "Settings"] = JSON.parse(window.localStorage.getItem(e.data.reload))
             this.setState(settings)
+            if (e.data.reload == "header") {
+                if (this.socket) this.socket.close()
+                if (this.state.headerSettings.wsrelay) {
+                    const url = (this.state.headerSettings.wsrelay.substr(0, 2) != "ws" ? "ws://" : "") + this.state.headerSettings.wsrelay
+                    this.socket = new WebSocket(url)
+                }
+            }
         } catch (ex) { }
     }
 
@@ -70,6 +81,15 @@ export default class MainWindow extends Component {
         }
 
         window.localStorage["version"] = currentVersion
+
+        const hash = window.location.hash
+        if (hash.length > 1) {
+            const url = atob(hash.substr(1))
+            this.receiver = new WebSocket((url.substr(0, 2) != "ws" ? "ws://" : "") + url)
+            this.receiver.onmessage = evt => {
+                this.overlayDataUpdate({ detail: JSON.parse(evt.data) })
+            }
+        }
     }
 
     componentWillUnmount() {

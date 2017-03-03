@@ -77,6 +77,7 @@ export default class GeneralSettings extends Component {
     }
 
     render() {
+        const wsrelayaddress = this.state.wsrelay? (<span>Share the link via <input type="text" class="pure-input-2-3" value={`${location.protocol}//${location.hostname}${location.port? ":" + location.port: ""}${location.pathname.replace(/config\.html$/, "")}#${btoa(this.state.wsrelay)}`} locked /></span>): ""
         return (
             <div className="pure-u-3-4 content">
                 <div class="title">
@@ -90,6 +91,15 @@ export default class GeneralSettings extends Component {
                         <div className="pure-control-group">
                             <label for="customName">Your ACT Name</label>
                             <input id="customName" type="text" name="customName" value={this.state.customName} onInput={linkEvent(this, this.changeValue)} />
+                        </div>
+
+                        <div className="pure-control-group">
+                            <label for="wsrelay">Websocket Relay</label>
+                            <input id="wsrelay" type="text" name="wsrelay" value={this.state.wsrelay} onInput={linkEvent(this, this.changeValue)} />
+                            <div class="pure-form-message-inline">
+                                Setup a server using <a href="https://www.npmjs.com/package/wsrelay" target="_BLANK">wsrelay</a> to forward messages to other clients<br />
+                                {wsrelayaddress}
+                            </div>
                         </div>
                     </fieldset>
                     <fieldset>
