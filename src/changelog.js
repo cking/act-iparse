@@ -1,6 +1,15 @@
 export const current = 1
 export const list = [
     {
+        name: "ladybug",
+        date: "2017-03-03",
+        changes: [
+            "colorpicker for custom colors",
+            "missing pgl to mnk mapping",
+            "live share your parses, if you have wsrelay installed somewhere" 
+        ]
+    },
+    {
         name: "inkognito",
         date: "2017-02-23",
         changes: [
