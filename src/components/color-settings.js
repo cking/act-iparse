@@ -152,7 +152,7 @@ export default class ColorSettings extends Component {
                         {this.state.color.custom.map((line, idx) => (
                             <div class="pure-control-group">
                                 <input className="label" id={"custom-" + idx + "-search"} name={"custom-" + idx + "-search"} value={line.search || ""} type="text" placeholder="Search" onInput={linkEvent(this, this.changeValue)} />
-                                <input id={"custom-" + idx + "-color"} name={"custom-" + idx + "-color"} value={line.color || ""} type="color" placeholder="Custom color" onInput={linkEvent(this, this.changeValue)} />
+                                <ColorPicker id={"custom-" + idx + "-color"} name={"custom-" + idx + "-color"} value={line.color || ""} type="color" placeholder="Custom color" onInput={linkEvent(this, this.changeValue)} />
                                 <div className="pure-help-inline">
                                     <button type="button" class="pure-button" data-id={idx} onClick={linkEvent(this, this.removeColorOverwrite)}>Remove row</button>
                                 </div>
