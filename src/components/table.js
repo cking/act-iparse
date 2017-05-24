@@ -1,6 +1,4 @@
-import h from 'inferno-create-element'
-import Component from "inferno-component"
-import linkEvent from "inferno"
+import { h, Component } from "preact"
 import { renderHeader, renderCell } from "./columns"
 import { getStyle } from "./meter"
 

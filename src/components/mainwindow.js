@@ -1,6 +1,4 @@
-import h from 'inferno-create-element'
-import Component from "inferno-component"
-import linkEvent from "inferno"
+import { h, Component } from "preact"
 
 import Header from "./header"
 import Table from "./table"
@@ -98,17 +96,17 @@ export default class MainWindow extends Component {
         window.removeEventListener("message", this.message)
     }
 
-    openConfigWindow(ctx, ev) {
-        if (ctx.config && ctx.config.closed) ctx.config = null
-        if (!ctx.config) ctx.config = window.open("config.html", "_blank", "height=560,width=720")
-        ctx.config.focus()
+    openConfigWindow(ev) {
+        if (this.config && this.config.closed) this.config = null
+        if (!this.config) this.config = window.open("config.html", "_blank", "height=560,width=720")
+        this.config.focus()
         humane.log("Configuration screen opened, check your background windows")
     }
 
     render() {
         const resizeHandle = this.state.isLocked ? "" : (<div id="resize"></div>)
         const configureButtons = this.state.isLocked ? "" : (<div class="btngrp">
-            <button onClick={linkEvent(this, this.openConfigWindow)}><span className="ion-gear-a"></span></button>
+            <button onClick={ this.openConfigWindow.bind(this) }><span className="ion-gear-a"></span></button>
         </div>)
         return (
             <div>

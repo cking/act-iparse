@@ -1,5 +1,4 @@
-import h from 'inferno-create-element'
-import Component from "inferno-component"
+import { h, Component } from "preact"
 
 function generateStats(props) {
     switch (props.settings.stats) {

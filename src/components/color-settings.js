@@ -1,6 +1,4 @@
-import h from 'inferno-create-element'
-import Component from "inferno-component"
-import linkEvent from "inferno"
+import { h, Component } from "preact"
 import humane from "humane-js"
 import { Jobs } from "../util"
 import { colors, renderColorSettings, getColor, fills, getTexture, styles, getStyle } from "./meter"
@@ -48,46 +46,46 @@ export default class ColorSettings extends Component {
         }, this.state.color.custom))
     }
 
-    addNewColorOverwrite(ctx, ev) {
-        const color = ctx.state.color
+    addNewColorOverwrite(ev) {
+        const color = this.state.color
         color.custom.push({ color: "#000000" })
-        ctx.setState({ color })
+        this.setState({ color })
 
-        console.log(ctx.state)
+        console.log(this.state)
 
         ev.preventDefault()
     }
 
-    removeColorOverwrite(ctx, ev) {
-        const color = Object.assign({}, ctx.state.color)
+    removeColorOverwrite(ev) {
+        const color = Object.assign({}, this.state.color)
         color.custom.splice(ev.target.dataset.id, 1)
-        ctx.setState({ color })
+        this.setState({ color })
 
         ev.preventDefault()
     }
 
-    changeValue(ctx, ev) {
+    changeValue(ev) {
         const o = {}
         let val = ev.target.type === "checkbox" ? ev.target.checked : ev.target.value
         if (ev.target.name.indexOf("-") < 0) {
             o[ev.target.name] = val
         } else {
-            o.color = ctx.state.color || {custom:{}}
+            o.color = this.state.color || {custom:{}}
             const [cat, key, type] = ev.target.name.split("-")
             if (!type) {
-                o.color[cat] = ctx.state.color[cat] || {}
+                o.color[cat] = this.state.color[cat] || {}
                 o.color[cat][key] = val
             } else {
-                o.color[cat] = ctx.state.color[cat] || {}
+                o.color[cat] = this.state.color[cat] || {}
                 o.color[cat][key] = o.color[cat][key] || {}
                 o.color[cat][key][type] = val
             }
         }
-        ctx.setState(o)
+        this.setState(o)
     }
 
-    saveForm(ctx, ev) {
-        const o = Object.assign({}, ctx.state)
+    saveForm(ev) {
+        const o = Object.assign({}, this.state)
         delete o.exampleName
         delete o.exampleJob
         window.localStorage.setItem("meter", JSON.stringify(o))
@@ -103,7 +101,7 @@ export default class ColorSettings extends Component {
     render() {
         return (
             <div className="pure-u-3-4 content">
-                <form class="pure-form pure-form-aligned" onSubmit={linkEvent(this, this.saveForm)} method="post">
+                <form class="pure-form pure-form-aligned" onSubmit={this.saveForm.bind(this)} method="post">
                     <div class="title">
                         Colors
                         <button type="submit" class="pure-button">Save</button>
@@ -114,32 +112,32 @@ export default class ColorSettings extends Component {
 
                         <div className="pure-control-group">
                             <label for="style">Choose Style</label>
-                            <select id="style" name="style" onChange={linkEvent(this, this.changeValue)}>
+                            <select id="style" name="style" onChange={this.changeValue.bind(this)}>
                                 {Object.keys(styles).map(key => <option value={key} selected={this.state.style == key}>{styles[key].name}</option>)}
                             </select>
                         </div>
 
                         <div className="pure-control-group">
                             <label for="fill">Choose fill method</label>
-                            <select id="fill" name="fill" onChange={linkEvent(this, this.changeValue)}>
+                            <select id="fill" name="fill" onChange={this.changeValue.bind(this)}>
                                 {Object.keys(fills).map(key => <option value={key} selected={this.state.fill == key}>{fills[key].name}</option>)}
                             </select>
                         </div>
 
                         <div className="pure-control-group">
                             <label for="fill">Choose transparency</label>
-                            <input type="range" min="0" max="100" id="transparency" name="transparency" value={this.state.transparency} onInput={linkEvent(this, this.changeValue)} />
+                            <input type="range" min="0" max="100" id="transparency" name="transparency" value={this.state.transparency} onInput={this.changeValue.bind(this)} />
                         </div>
 
                         <div className="pure-control-group">
                             <label for="cgen">Choose color selection mode</label>
-                            <select id="cgen" name="cgen" onChange={linkEvent(this, this.changeValue)}>
+                            <select id="cgen" name="cgen" onChange={this.changeValue.bind(this)}>
                                 {Object.keys(colors).map(key => <option value={key} selected={this.state.cgen == key}>{colors[key].name}</option>)}
                             </select>
                         </div>
                     </fieldset>
 
-                    {renderColorSettings(this.state.cgen, this.state.color[this.state.cgen], linkEvent(this, this.changeValue))}
+                    {renderColorSettings(this.state.cgen, this.state.color[this.state.cgen], this.changeValue.bind(this))}
 
                     <fieldset>
                         <legend>Custom colors</legend>
@@ -151,16 +149,16 @@ export default class ColorSettings extends Component {
 
                         {this.state.color.custom.map((line, idx) => (
                             <div class="pure-control-group">
-                                <input className="label" id={"custom-" + idx + "-search"} name={"custom-" + idx + "-search"} value={line.search || ""} type="text" placeholder="Search" onInput={linkEvent(this, this.changeValue)} />
-                                <ColorPicker id={"custom-" + idx + "-color"} name={"custom-" + idx + "-color"} value={line.color || ""} type="color" placeholder="Custom color" onInput={linkEvent(this, this.changeValue)} />
+                                <input className="label" id={"custom-" + idx + "-search"} name={"custom-" + idx + "-search"} value={line.search || ""} type="text" placeholder="Search" onInput={this.changeValue.bind(this)} />
+                                <ColorPicker id={"custom-" + idx + "-color"} name={"custom-" + idx + "-color"} value={line.color || ""} type="color" placeholder="Custom color" onInput={this.changeValue.bind(this)} />
                                 <div className="pure-help-inline">
-                                    <button type="button" class="pure-button" data-id={idx} onClick={linkEvent(this, this.removeColorOverwrite)}>Remove row</button>
+                                    <button type="button" class="pure-button" data-id={idx} onClick={this.removeColorOverwrite.bind(this)}>Remove row</button>
                                 </div>
                             </div>
                         ))}
 
                         <div class="pure-control-group">
-                            <button type="button" class="pure-button" onClick={linkEvent(this, this.addNewColorOverwrite)}>Add new row</button>
+                            <button type="button" class="pure-button" onClick={this.addNewColorOverwrite.bind(this)}>Add new row</button>
                         </div>
                     </fieldset>
 
@@ -169,12 +167,12 @@ export default class ColorSettings extends Component {
 
                         <div className="pure-control-group">
                             <label for="example-name">Example Name</label>
-                            <input id="example-name" name="exampleName" value={this.state.exampleName} type="text" onInput={linkEvent(this, this.changeValue)} />
+                            <input id="example-name" name="exampleName" value={this.state.exampleName} type="text" onInput={this.changeValue.bind(this)} />
                         </div>
 
                         <div className="pure-control-group">
                             <label for="example-job">Example Job</label>
-                            <select id="example-job" name="exampleJob" onChange={linkEvent(this, this.changeValue)}>
+                            <select id="example-job" name="exampleJob" onChange={this.changeValue.bind(this)}>
                                 <option value="" selected={!this.state.exampleJob}></option>
                                 {Object.keys(Jobs).map(abbr => <option value={abbr} selected={this.state.exampleJob == abbr}>{Jobs[abbr]}</option>)}
                             </select>

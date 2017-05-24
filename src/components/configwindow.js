@@ -1,8 +1,5 @@
-import h from 'inferno-create-element'
-import Component from "inferno-component"
-import linkEvent from "inferno"
-import { Router, Route, IndexRoute, Redirect, Link } from "inferno-router"
-import createHistory from "history/createHashHistory"
+import { h, Component } from "preact"
+import { HashRouter, Route, Link } from "react-router-dom"
 import GeneralSettings from "./general-settings"
 import TableSettings from "./table-settings"
 import ColorSettings from "./color-settings"
@@ -69,13 +66,13 @@ export function AboutWindow() {
 
 export default function ConfigRouter() {
     return (
-        <Router history={createHistory()}>
-            <Route component={ConfigWindow}>
-                <Route component={GeneralSettings} path="/" />
+        <HashRouter>
+            <ConfigWindow>
+                <Route component={GeneralSettings} exact path="/" />
                 <Route component={TableSettings} path="/table" />
                 <Route component={ColorSettings} path="/colors" />
                 <Route component={AboutWindow} path="/about" />
-            </Route>
-        </Router>
+            </ConfigWindow>
+        </HashRouter>
     )
 }

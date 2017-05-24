@@ -1,4 +1,4 @@
-import h from 'inferno-create-element'
+import { h, Component } from "preact"
 import { Jobs, hash, jobType, classToJob, petType } from "../util"
 import Color from "color"
 import ColorPicker from "../ui/color-picker"

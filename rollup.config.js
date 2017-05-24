@@ -9,10 +9,11 @@ export default {
   dest: 'script.js',
   plugins: [
     alias({
+      "react-router": require.resolve("react-router"),
       "react-color": require.resolve("react-color"),
       "reactcss": require.resolve("reactcss"),
-      'react': require.resolve('inferno-compat'),
-      'react-dom': require.resolve('inferno-compat'),
+      'react': require.resolve('preact-compat'),
+      'react-dom': require.resolve('preact-compat'),
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
@@ -22,7 +23,6 @@ export default {
     }),
     commonjs({
       namedExports: {
-        "node_modules/inferno-router/index.js": ["Router", "Route", "IndexRoute", "Redirect", "Link"],
         "node_modules/preact/dist/preact.js": ["h", "cloneElement", "Component", "render", "renderer", "options"]
       }
     }),

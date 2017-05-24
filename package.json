@@ -24,14 +24,11 @@
   "dependencies": {
     "color": "^1.0.3",
     "dragula": "^3.7.2",
-    "history": "^4.5.1",
     "humane-js": "^3.2.2",
-    "inferno": "^3.2",
-    "inferno-compat": "^3.2",
-    "inferno-component": "^3.2",
-    "inferno-create-element": "^3.2",
-    "inferno-router": "^3.2",
     "normat": "^1.2.3",
-    "react-color": "^2.11.1"
+    "preact": "^8.1.0",
+    "preact-compat": "^3.16.0",
+    "react-color": "^2.11.1",
+    "react-router-dom": "^4.1.1"
   }
 }

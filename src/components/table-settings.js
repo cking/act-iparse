@@ -1,6 +1,4 @@
-import h from 'inferno-create-element'
-import Component from "inferno-component"
-import linkEvent from "inferno"
+import { h, Component } from "preact"
 import humane from "humane-js"
 import dragula from "dragula"
 import { defaultCellSettings, default as columnDefinitions } from "./columns"
@@ -64,21 +62,21 @@ export default class TableSettings extends Component {
         this.drake.destroy()
     }
 
-    toggleCell(ctx, ev) {
+    toggleCell(ev) {
         const cellId = queryClosestSelector(ev.target, "li").dataset.key
         const val = ev.target.checked
-        const cells = ctx.state.cells
+        const cells = this.state.cells
         const cell = cells.find(c => c.id == cellId)
         cell.enabled = val
-        ctx.setState({ cells })
+        this.setState({ cells })
     }
 
-    changeValue(ctx, ev) {
+    changeValue(ev) {
         const cellId = queryClosestSelector(ev.target, "li").dataset.key
         const optId = ev.target.name.split("-")[1]
         let val = ev.target.type === "checkbox" ? ev.target.checked : ev.target.value
 
-        const cells = ctx.state.cells
+        const cells = this.state.cells
         const cell = cells.find(c => c.id == cellId)
 
         if (!cell) {
@@ -94,11 +92,11 @@ export default class TableSettings extends Component {
                 opt.value = val
             }
         }
-        ctx.setState({ cells })
+        this.setState({ cells })
     }
 
-    saveForm(ctx, ev) {
-        window.localStorage.setItem("cells", JSON.stringify(ctx.state.cells.map(c => {
+    saveForm(ev) {
+        window.localStorage.setItem("cells", JSON.stringify(this.state.cells.map(c => {
             const nc = Object.assign({}, c)
             delete nc.open
             return nc
@@ -112,13 +110,13 @@ export default class TableSettings extends Component {
         ev.preventDefault()
     }
 
-    resetSettings(ctx, ev) {
+    resetSettings(ev) {
         if (!confirm("Do you really want to reset your settings?")) return
-        ctx.setState({ cells: defaultCellSettings() })
-        window.localStorage.setItem("cells", JSON.stringify(ctx.state.cells))
+        this.setState({ cells: defaultCellSettings() })
+        window.localStorage.setItem("cells", JSON.stringify(this.state.cells))
         humane.log("Settings reset!")
 
-        window.opener.postMessage({
+        window.opener && window.opener.postMessage({
             reload: "cells"
         }, "*")
 
@@ -131,18 +129,18 @@ export default class TableSettings extends Component {
         const v = cell.opts.find(opt => opt.id == def.key)
         const val = v ? v.value : def.default
         switch (def.type) {
-            case "text": return [label, (<input id={cell.id + "-" + def.key} name={cell.id + "-" + def.key} value={val} type="text" onInput={linkEvent(this, this.changeValue)} />)]
+            case "text": return [label, (<input id={cell.id + "-" + def.key} name={cell.id + "-" + def.key} value={val} type="text" onInput={this.changeValue.bind(this)} />)]
             case "option": return [<span className="label" title={def.description}>{def.name}</span>, Object.keys(def.values).map(k => <label class="pure-radio">
-                <input type="radio" id={cell.id + "-" + def.key} name={cell.id + "-" + def.key} value={k} checked={val == k} onClick={linkEvent(this, this.changeValue)} />{def.values[k]}
+                <input type="radio" id={cell.id + "-" + def.key} name={cell.id + "-" + def.key} value={k} checked={val == k} onClick={this.changeValue.bind(this)} />{def.values[k]}
             </label>)]
             case "checkbox": return [
                 <span className="label">{def.name}</span>,
                 (<label class="pure-checkbox">
-                    <input type="checkbox" id={cell.id + "-" + def.key} name={cell.id + "-" + def.key} checked={val} onClick={linkEvent(this, this.changeValue)} />
+                    <input type="checkbox" id={cell.id + "-" + def.key} name={cell.id + "-" + def.key} checked={val} onClick={this.changeValue.bind(this)} />
                 </label>),
                 <span className="pure-help-inline">{def.description}</span>
             ]
-            case "select": return [label, (<select id={cell.id + "-" + def.key} name={cell.id + "-" + def.key} onChange={linkEvent(this, this.changeValue)}>
+            case "select": return [label, (<select id={cell.id + "-" + def.key} name={cell.id + "-" + def.key} onChange={this.changeValue.bind(this)}>
                 {Object.keys(def.values).map(k => <option value={k} selected={val == k}>{def.values[k]}</option>)}
             </select>)]
         }
@@ -155,7 +153,7 @@ export default class TableSettings extends Component {
         return (<li {... { "data-key": cell.id, "data-idx": idx }}>
             <span className="ion-drag"></span>
             <div>
-                <input type="checkbox" name="enabled" checked={cell.enabled} onClick={linkEvent(this, this.toggleCell)} /> <strong title={col.description}>{col.name}</strong>
+                <input type="checkbox" name="enabled" checked={cell.enabled} onClick={this.toggleCell.bind(this)} /> <strong title={col.description}>{col.name}</strong>
                 <fieldset style={{ display: cell.open ? "block" : "none" }}>
                     {col.options.map(opt => {
                         return (<div className="pure-control-group">
@@ -171,7 +169,7 @@ export default class TableSettings extends Component {
     render() {
         return (
             <div className="pure-u-3-4 content">
-                <form class="pure-form pure-form-aligned" onSubmit={linkEvent(this, this.saveForm)} method="post">
+                <form class="pure-form pure-form-aligned" onSubmit={this.saveForm.bind(this)} method="post">
                     <div class="title">
                         Table
                         <button type="submit" class="pure-button">Save</button>
@@ -189,7 +187,7 @@ export default class TableSettings extends Component {
 
                     <fieldset>
                         <button type="submit" class="pure-button">Save</button>
-                        <button type="button" class="pure-button" onClick={linkEvent(this, this.resetSettings)}>Reset</button>
+                        <button type="button" class="pure-button" onClick={this.resetSettings.bind(this)}>Reset</button>
                     </fieldset>
                 </form>
             </div>

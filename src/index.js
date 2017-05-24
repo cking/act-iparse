@@ -1,6 +1,5 @@
 import snapshot from "./snapshot.js"
-import h from 'inferno-create-element'
-import Inferno from "inferno"
+import { h, render } from "preact"
 
 import MainWindow from "./components/mainwindow"
 import ConfigWindow from "./components/configwindow"
@@ -41,7 +40,7 @@ localStorage.setItem("meter", JSON.stringify(Object.assign(defaultMeterSettings(
 
 // need to define it on window, buble would remove it otherwise
 window.renderParser = target => {
-    Inferno.render((
+    render((
         <MainWindow />
     ), target)
 
@@ -53,7 +52,7 @@ window.renderParser = target => {
 
 // need to define it on window, buble would remove it otherwise
 window.renderConfig = target => {
-    Inferno.render((
+    render((
         <ConfigWindow />
     ), target)
 }

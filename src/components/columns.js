@@ -1,4 +1,4 @@
-import h from 'inferno-create-element'
+import { h, Component } from "preact"
 import { arrayToObject, jobAbbrToLong, shortenSkill, iconFromCombatant } from "../util"
 import normat from "normat"
 const si = normat([
