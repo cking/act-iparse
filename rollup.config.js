@@ -22,6 +22,7 @@ export default {
     }),
     commonjs({
       namedExports: {
+        "node_modules/inferno-router/index.js": ["Router", "Route", "IndexRoute", "Redirect", "Link"],
         "node_modules/preact/dist/preact.js": ["h", "cloneElement", "Component", "render", "renderer", "options"]
       }
     }),

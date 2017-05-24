@@ -1,6 +1,6 @@
 import h from 'inferno-create-element'
 import Component from "inferno-component"
-import { linkEvent } from "inferno"
+import linkEvent from "inferno"
 import humane from "humane-js"
 import { Jobs } from "../util"
 import { colors, renderColorSettings, getColor, fills, getTexture, styles, getStyle } from "./meter"

@@ -1,6 +1,6 @@
 import h from 'inferno-create-element'
 import Component from "inferno-component"
-import { linkEvent } from "inferno"
+import linkEvent from "inferno"
 import humane from "humane-js"
 
 import { defaultCellSettings } from "./columns"

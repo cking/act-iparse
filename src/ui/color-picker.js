@@ -1,5 +1,5 @@
 import h from 'inferno-create-element'
-import { linkEvent } from "inferno"
+import linkEvent from "inferno"
 import Component from "inferno-component"
 import Color from "color"
 /*import React from 'react'
