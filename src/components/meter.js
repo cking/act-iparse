@@ -166,7 +166,6 @@ export function renderColorSettings(type, settings, ev) {
 }
 
 export function getColor(type, settings, combatant, overwrites) {
-    console.log(Array.isArray(overwrites))
     const overwrite = Array.isArray(overwrites) ? overwrites.find(ow => {
         const re = new RegExp("^" + ow.search + "$", "i")
         return combatant.name.match(re) ||
