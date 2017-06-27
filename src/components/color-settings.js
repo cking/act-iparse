@@ -2,6 +2,7 @@ import { h, Component } from "preact"
 import humane from "humane-js"
 import { Jobs } from "../util"
 import { colors, renderColorSettings, getColor, fills, getTexture, styles, getStyle } from "./meter"
+import ColorPicker from "../ui/color-picker"
 
 export default class ColorSettings extends Component {
     constructor(props) {
@@ -50,8 +51,6 @@ export default class ColorSettings extends Component {
         const color = this.state.color
         color.custom.push({ color: "#000000" })
         this.setState({ color })
-
-        console.log(this.state)
 
         ev.preventDefault()
     }

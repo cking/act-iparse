@@ -22,24 +22,26 @@ export default class ColorPicker extends Component {
     })
   }
 
-  handleClick(ctx, ev) {
-    ctx.setState({ displayColorPicker: !ctx.state.displayColorPicker })
+  handleClick(ev) {
+    this.setState({ displayColorPicker: !this.state.displayColorPicker })
   }
 
-  handleClose(ctx, ev) {
-    ctx.setState({ displayColorPicker: false })
+  handleClose(ev) {
+    this.setState({ displayColorPicker: false })
   }
 
   handleChange(color) {
-    document.getElementById(this.props.id).dispatchEvent(new Event("change"))
     this.setState({ color: color.rgb })
+    const el = document.getElementById(this.props.id)
+    el.value = color.hex
+    el.dispatchEvent(new Event("change"))
   }
 
   render() {
     return (
       <span>
-        <input type="hidden" id={this.props.id} name={this.props.name} value={Color.rgb(this.state.color.r, this.state.color.g, this.state.color.b).hex()} onChange={this.props.onInput} />
-        <div className="pure-button" onClick={linkEvent(this, this.handleClick)}>
+        <input type="hidden" id={this.props.id} name={this.props.name} value={Color.rgb(this.state.color.r, this.state.color.g, this.state.color.b).hex()} onchange={this.props.onInput} />
+        <div className="pure-button" onClick={this.handleClick.bind(this)}>
           <div style={{
             width: '36px',
             height: '14px',
@@ -54,7 +56,7 @@ export default class ColorPicker extends Component {
             right: '0px',
             bottom: '0px',
             left: '0px',
-          }} onClick={linkEvent(this, this.handleClose)} />
+          }} onClick={this.handleClose.bind(this)} />
           <SketchPicker color={this.state.color} onChange={this.handleChange.bind(this)} />
         </div> : null}
       </span>

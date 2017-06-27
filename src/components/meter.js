@@ -164,9 +164,8 @@ export function renderColorSettings(type, settings, ev) {
 }
 
 export function getColor(type, settings, combatant, overwrites) {
-    if (!colors[type].getColor) return
-
-    const overwrite = Array.isArray(overwrite) ? overwrites.find(ow => {
+    console.log(Array.isArray(overwrites))
+    const overwrite = Array.isArray(overwrites) ? overwrites.find(ow => {
         const re = new RegExp("^" + ow.search + "$", "i")
         return combatant.name.match(re) ||
             combatant.Job.match(re) ||
@@ -175,7 +174,10 @@ export function getColor(type, settings, combatant, overwrites) {
             classToJob(combatant.Job).match(re) ||
             (Jobs[classToJob(combatant.Job)] || "").match(re)
     }) : false
+
     if (overwrite) return overwrite.color
+
+    if (!colors[type].getColor) return
     if (!colors[type].noPetColors) {
         const petColor = petColors.getColor(settings, combatant)
         if (petColor) return petColor
