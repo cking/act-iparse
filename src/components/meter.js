@@ -134,6 +134,8 @@ export const colors = {
             colorSetting("whm", "White Mage", "#757575"),
             colorSetting("sch", "Scholar", "#7986cb"),
             colorSetting("ast", "Astrologian", "#795548"),
+            colorSetting("rdm", "Red Mage", "#D157C2"),
+            colorSetting("sam", "Samurai", "#FFC623"),
         ],
         getColor: (settings, combatant) => (settings && settings[classToJob(combatant.Job)] ? settings[classToJob(combatant.Job)] : getDefaultValue(colors.job, classToJob(combatant.Job))) || "transparent"
     },

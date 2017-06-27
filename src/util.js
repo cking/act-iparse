@@ -48,6 +48,8 @@ export const Jobs = {
     pgl: "Pugilist", mnk: "Monk",
     rog: "Rogue", nin: "Ninja",
     thm: "Thaumaturge", blm: "Black Mage",
+    rdm: "Red Mage",
+    sam: "Samurai",
 }
 
 export function jobAbbrToLong(abbr) {
@@ -91,6 +93,7 @@ export function jobType(job, split) {
 
         case "acn": case "smn":
         case "thm": case "blm":
+        case "rdm":
             return split ? "mage" : "dd"
 
         case "arc": case "brd":
