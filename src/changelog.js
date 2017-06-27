@@ -1,6 +1,14 @@
 export const current = 1
 export const list = [
     {
+        name: "transfusion",
+        date: "2017-06-27",
+        changes: [
+            "stormblood support",
+            "long standing colorization issues"
+        ]
+    },
+    {
         name: "ladybug",
         date: "2017-03-03",
         changes: [
