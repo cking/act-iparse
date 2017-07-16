@@ -1,6 +1,6 @@
 "use strict"
 
-const { nerdRound } = require("./util")
+const nerdRound = require("./util").nerdRound
 
 exports.tdps = {
     name: "TDPS",

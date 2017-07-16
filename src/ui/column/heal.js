@@ -1,6 +1,6 @@
 "use strict"
 
-const { nerdRound } = require("./util")
+const nerdRound = require("./util").nerdRound
 
 exports.hps = {
     name: "HPS",
@@ -183,7 +183,8 @@ exports.maxheal = {
         return "width: 12rem"
     },
     render: (out, args) => {
-        let [skill, dottedHeal] = args.combatant.maxheal.split("-")
+        const maxSplit = args.combatant.maxheal.split("-")
+        let skill = maxSplit[0], dottedHeal = maxSplit[1]
 
         if (!skill) return
         if (skill.length > 15) {

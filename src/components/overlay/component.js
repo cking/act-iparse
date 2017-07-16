@@ -1,3 +1,5 @@
+"use strict"
+
 const humane = require("humane-js")
 
 module.exports = class {

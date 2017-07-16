@@ -1,6 +1,7 @@
 "use strict"
 
-const {jobs} = require("../../util")
+const util = require("../../util")
+const jobs = util.jobs
 // TODO: shorten skill names
 
 exports.jobAbbrToLong = function (abbr) {

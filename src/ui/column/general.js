@@ -1,7 +1,8 @@
 "use strict"
 
-const {jobType} = require("../../util")
-const { iconFromCombatant, jobAbbrToLong } = require("./util.js")
+const jobType = require("../../util").jobType
+const util = require("./util.js")
+const iconFromCombatant = util.iconFromCombatant, jobAbbrToLong = util.jobAbbrToLong
 
 exports.position = {
     name: "Position",
@@ -235,7 +236,8 @@ exports.maxall = {
         if (jobType[args.combatant.Job.toLowerCase()] === "heal") {
             max = args.combatant.maxheal
         }
-        let [skill, dottedDamage] = max.split("-")
+        const maxSplit = max.split("-")
+        let skill = maxSplit[0], dottedDamage = maxSplit[1]
 
         if (!skill) return
         if (skill.length > 15) {

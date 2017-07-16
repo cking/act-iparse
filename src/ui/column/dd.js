@@ -1,6 +1,6 @@
 "use strict"
 
-const { nerdRound } = require("./util")
+const nerdRound = require("./util").nerdRound
 
 exports.dps = {
     name: "DPS",
@@ -115,7 +115,8 @@ exports.maxhit = {
         return "width: 12rem"
     },
     render: (out, args) => {
-        let [skill, dottedDamage] = args.combatant.maxhit.split("-")
+        const maxSplit = args.combatant.maxhit.split("-")
+        let skill = maxSplit[0], dottedDamage = maxSplit[1]
 
         if (!skill) return
         if (skill.length > 15) {
