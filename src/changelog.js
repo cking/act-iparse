@@ -1,5 +1,15 @@
-export const current = 1
-export const list = [
+"use strict"
+
+exports.current = "polo"
+exports.list = [
+    {
+        name: "polo",
+        date: "To Be Done",
+        changes: [
+            "direct hit and crit direct hit support",
+            "completely changed and revamped rendering engine"
+        ]
+    },
     {
         name: "transfusion",
         date: "2017-06-27",

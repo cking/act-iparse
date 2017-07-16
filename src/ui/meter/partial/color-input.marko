@@ -1,0 +1,100 @@
+class {
+    onCreate () {
+        this.state = {
+            color: null,
+            viewPicker: false,
+        }
+    }
+
+    onMount() {
+        if (this.state.color == null) {
+            this.setState("color", this.input.defaultColor)
+        }
+        const el = this.getEl("input")
+        this.jsc = new jscolor(el, {hash: true, value: this.state.color, onFineChange: () => this.onColorChange(null)})
+    }
+
+    toggleDisplay(status) {
+        this.setState("viewPicker", status)
+        console.log("viewPicker", status)
+    }
+
+    onColorChange(color) {
+        if (!color) {
+            color = this.jsc.toHEXString()
+        }
+        this.emit("colorChange", color)
+    }
+}
+
+style {
+    .pure-color-picker {
+        background: rgba(0, 0, 0, 0.2);
+        display: inline-block;
+        border-radius: 1rem;
+        padding: .5rem;
+        margin: 1rem 25% 2rem 11rem;
+    }
+
+    .swatch {
+        padding: 5px;
+        background: #fff;
+        border-radius: 1px;
+        box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .color {
+       width: 36px;
+       height: 14px;
+       border-radius: 2px;
+    }
+
+    .popover {
+        position: absolute;
+        z-index: 2;
+    }
+
+    .cover {
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+    }
+
+    .picker: {
+        padding: 10px 10px 0;
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 8px 16px rgba(0,0,0,.15);
+    }
+
+    
+    .saturation: {
+        width: 100%;
+        padding-bottom: 55%;
+        position: relative;
+        overflow: hidden;
+        border-radius: 2px 2px 0 0;
+    }
+
+    .saturation .color {
+        absolute: '0px 0px 0px 0px',
+        background: `hsl(${ this.props.hsl.h },100%, 50%)`,
+        borderRadius: this.props.radius,
+    }
+}
+
+<div.pure-control-group>
+    <label for-key="input" key="label">${input.name}</label>
+    <input.swatch key="input" type="text" name="color" value=state.color on-chang("onColorChange", null)>
+    <!--<div.swatch on-click("toggleDisplay", true)>
+        <div.color style={ backgroundColor: state.color } />
+    </div>
+    <div.popover if(state.viewPicker)>
+        <div.cover on-click("toggleDisplay", false) />
+        <picker />
+    </div>-->
+</div>

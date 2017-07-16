@@ -1,0 +1,154 @@
+import { jobs } from "../../../../util"
+import meter from "../../../../ui/meter"
+import humane from "humane-js"
+
+class {
+    onCreate() {
+        this.state = {
+            meter: JSON.parse(localStorage.getItem("meter")),
+            example: { name: "Vanthia Orcus", Job: "war" },
+        }
+    }
+
+    onSubmit(ev, el) {
+        ev.preventDefault()
+        const meter = JSON.stringify(this.state.meter)
+        localStorage.setItem("meter", meter)
+
+        humane.log("Settings saved!")
+    }
+
+    onMount() {
+        this.updatePreview()
+    }
+
+    updatePreview() {
+        // update state
+        this.setState({ 
+            meter: {
+                style: document.getElementById("style").value,
+                fill: document.getElementById("fill").value,
+                cgen: document.getElementById("cgen").value,
+                transparency: document.getElementById("transparency").value,
+            },
+            example: {
+                name: document.getElementById("example-name").value,
+                Job: document.getElementById("example-job").value,
+            }
+        })
+
+        const canvas = this.getEl("preview")
+        const context = canvas.getContext("2d")
+        meter.render(context, Object.assign({ "damage%": "80%" }, this.state.example), this.state.meter)
+    }
+
+    onColorChange(colors) {
+        const meter = this.state.meter
+        meter.custom = meter.custom || {}
+        meter.custom[this.state.meter.cgen] = Object.assign({}, meter.custom[this.state.meter.cgen], colors)
+        this.setState("meter", meter)
+    }
+}
+
+style {
+    .preview {
+        border: 1px solid silver;
+        width: 80%;
+        height: 2rem;
+    }
+}
+
+<form.content.pure-form.pure-form-aligned method="post" on-submit("onSubmit")>
+    <div.form>
+        <div.title><span.ion-paintbrush></span> Colors</div>
+
+        <fieldset>
+            <legend>Bar Style</legend>
+
+            <div.pure-control-group>
+                <label for="style">Choose Style</label>
+                <select id="style" name="style" on-change("updatePreview")>
+                    <option for(key, style in meter.styles) value=key selected=(key==state.meter.style)>
+                        ${style.name}
+                    </option>
+                </select>
+            </div>
+
+            <div.pure-control-group>
+                <label for="fill">Choose fill method</label>
+                <select id="fill" name="fill" on-change("updatePreview")>
+                    <option for(key, style in meter.textures) value=key selected=(key==state.meter.fill)>
+                        ${style.name}
+                    </option>
+                </select>
+            </div>
+
+            <div.pure-control-group>
+                <label for="fill">Choose transparency</label>
+                <input type="range" min="0" max="100" id="transparency" name="transparency" value=state.meter.transparency />
+            </div>
+
+            <div.pure-control-group>
+                <label for="cgen">Choose color selection mode</label>
+                <select id="cgen" name="cgen" on-change("updatePreview")>
+                    <option for(key, style in meter.colors) value=key selected=(key==state.meter.cgen)>
+                        ${style.name}
+                    </option>
+                </select>
+            </div>
+        </fieldset>
+
+        <if(meter.colors[state.meter.cgen].settings)>
+            <include(meter.colors[state.meter.cgen].settings, {colors: meter.colors[state.meter.cgen]}) on-colorChange("onColorChange") />
+        </if>
+
+<!--
+        <fieldset>
+            <legend>Custom colors</legend>
+
+            <p>
+                The search query runs on the character name, their job and job type in an case insensitive fashion.
+                If the search matches, the specified color will be used instead of the generated one.
+            </p>
+
+            {this.state.color.custom.map((line, idx) => (
+                <div class="pure-control-group">
+                    <input className="label" id={"custom-" + idx + "-search"} name={"custom-" + idx + "-search"} value={line.search || ""} type="text" placeholder="Search" onInput={this.changeValue.bind(this)} />
+                    <ColorPicker id={"custom-" + idx + "-color"} name={"custom-" + idx + "-color"} value={line.color || ""} type="color" placeholder="Custom color" onInput={this.changeValue.bind(this)} />
+                    <div className="pure-help-inline">
+                        <button type="button" class="pure-button" data-id={idx} onClick={this.removeColorOverwrite.bind(this)}>Remove row</button>
+                    </div>
+                </div>
+            ))}
+
+            <div class="pure-control-group">
+                <button type="button" class="pure-button" onClick={this.addNewColorOverwrite.bind(this)}>Add new row</button>
+            </div>
+        </fieldset>
+-->
+
+        <fieldset>
+            <legend>Preview</legend>
+
+            <div.pure-control-group>
+                <label for="example-name">Example Name</label>
+                <input id="example-name" name="exampleName" type="text" on-input("updatePreview") value=state.example.name />
+            </div>
+
+            <div.pure-control-group>
+                <label for="example-job">Example Job</label>
+                <select id="example-job" name="exampleJob" on-change("updatePreview")>
+                    <option value="" selected=(state.example.Job == "")></option>
+                    <option for(k, v in jobs) value=k selected=(state.example.Job == k)>${v}</option>
+                </select>
+            </div>
+
+            <canvas.preview key="preview" width="100%" height="2rem"></canvas>
+        </fieldset>
+    </div>
+
+
+    <div.btnbar>
+        <button type="submit">Save</button>
+    </div>
+</form>

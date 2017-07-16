@@ -1,0 +1,26 @@
+<div#window>
+    <div#navigation>
+        <div.title>
+            <span.ion-settings></span> Settings
+        </div>
+
+        <nav>
+            <ul.menu>
+                <li on-click("goto", "general")><span.ion-gear-b></span> General</li>
+                <li on-click("goto", "table")><span.ion-stats-bars></span> Table</li>
+                <li on-click("goto", "colors")><span.ion-paintbrush></span> Colors</li>
+                <li.separator></li>
+                <li on-click("goto", "skills")><span.ion-flash></span> Skills</li>
+                <li on-click("goto", "presets")><span.ion-levels></span> Presets</li>
+                <li.separator></li>
+                <li on-click("goto", "about")><span.ion-information-circled></span> About</li>
+            </ul>
+        </nav>
+    </div>
+    <div.main key="main">
+        <marko-router key="router"
+            debug=false
+            rootState="config"
+            componentPath="../config/routes/" />
+    </div>
+</div>

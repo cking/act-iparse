@@ -1,0 +1,49 @@
+import cl from "../../../../changelog"
+
+style {
+    .about span {
+        display: block;
+        font-weight: bold;
+        font-size: 1.7rem;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .about .ava {
+        border-radius: 50%;
+        float: left;
+    }
+
+    .about .name {
+        font-size: 1.5rem;
+        text-decoration: none;
+    }
+
+    .about .world {
+        font-style: italic;
+    }
+
+    .about:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+<div.title><span.ion-information-circled></span> About</div>
+<div.about>
+    <span>Written by</span>
+    <img.ava src="../../images/avatar.jpg">
+    <a.name href="http://eu.finalfantasyxiv.com/lodestone/character/9384803/" target="_blank">Vanthia Orcus</a>
+    <div.world>Cerberus</div>
+</div>
+
+<h2>Changelog</h2>
+<ul>
+    <li for(version in cl.list)>
+        <strong>${version.name}</strong> <em>(${version.date})</em>
+        <ol>
+            <li for(entry in version.changes)>${entry}</li>
+        </ol>
+    </li>
+</ul>

@@ -1,0 +1,56 @@
+{
+	"config": {
+		"_base": "/config.html",
+		"_default": "colors",
+
+		"general": {
+			"path": "/general",
+			"component": {
+				"key": "config-route-general",
+				"params": {}
+			}
+		},
+		
+		"table": {
+			"path": "/table",
+			"component": {
+				"key": "config-route-table",
+				"params": {}
+			}
+		},
+		
+		"colors": {
+			"path": "/colors",
+			"component": {
+				"key": "config-route-colors",
+				"params": {}
+			}
+		},
+
+		"about": {
+			"path": "/about",
+			"component": {
+				"key": "config-route-about",
+				"params": {}
+			}
+		}
+	}
+	// "rootState": {
+	// 	"_base": "/root",
+	// 	"_default": "myState",
+	// 	"myState": {
+	// 		"path": "/state",
+	// 		"component": {
+	// 			"key": "rootState-route-myState",
+	// 			"params": {}
+	// 		}
+	// 	},
+	// 	"notfound": {
+	// 		"path": "*",
+	// 		"component": {
+	// 			"key": "rootState-route-notfound",
+	// 			"params": {}
+	// 		}
+	// 	}
+	// }
+}

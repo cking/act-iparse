@@ -1,0 +1,36 @@
+$ var encounter = input.encounter
+$ var isActive = input.isActive
+
+<div#header.orange>
+  <if(!isActive)>waiting for data...</if>
+  <else>
+    <span if(input.settings.time) class={green: isActive && input.settings.highlightActiveEncounter, white: (!isActive) || (!input.settings.highlightActiveEncounter)}>[${encounter.duration}]&nbsp;</span>
+    <if(input.settings.target)>${encounter.title}:&nbsp;</if>
+    <span.blue if(input.settings.stats || input.settings.strongest)>
+        <if(input.settings.stats)>
+            <if(input.settings.stats.hit)>
+                ${encounter.ENCDPS} DPS&nbsp;
+            </if>
+            <if(input.settings.stats.hit && input.settings.stats.heal)>
+                /&nbsp;
+            </if>
+            <if(input.settings.stats.heal)>
+                ${encounter.ENCHPS} HPS&nbsp;
+            </if>
+        </if>
+        <if(input.settings.stats && input.settings.strongest)>-&nbsp;</if>
+        <if(input.settings.strongest)>
+            <if(input.settings.strongest.hit)>
+                ${encounter.maxhit}&nbsp;
+            </if>
+            <if(input.settings.strongest.hit && input.settings.strongest.heal)>
+                /&nbsp;
+            </if>
+            <if(input.settings.strongest.heal)>
+                ${encounter.maxheal}&nbsp;
+            </if>
+        </if>
+    </span>
+    <if(input.settings.deaths)>${encounter.deaths}†</if>
+  </else>
+</div>

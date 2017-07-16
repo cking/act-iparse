@@ -4,31 +4,30 @@
   "description": "ffxiv act ico parse",
   "main": "script.js",
   "scripts": {
-    "watch": "rollup -c -w -m",
-    "start": "rollup -c",
-    "serve": "http-server-spa . index.html 3000",
+    "watch": "cross-env NODE_ENV=development nodemon -e js,marko,css -w ./src -i '*.marko.js' ./script/build.js",
+    "start": "cross-env NODE_ENV=production node ./script/build.js",
+    "serve": "http-server-spa build index.html 3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Christopher König <criss@paars.de>",
   "license": "ISC",
   "devDependencies": {
+    "cross-env": "^5.0.1",
     "http-server-spa": "^1.2.0",
-    "rollup": "^0.41.4",
-    "rollup-plugin-alias": "^1.2.0",
-    "rollup-plugin-buble": "^0.15.0",
-    "rollup-plugin-commonjs": "^8",
-    "rollup-plugin-node-resolve": "^3",
-    "rollup-plugin-replace": "^1.1.1",
-    "rollup-watch": "^3.2.2"
+    "lasso": "^2.11.12",
+    "lasso-cli": "^2.0.7",
+    "lasso-marko": "^2.3.0",
+    "marko": "^4.4.16",
+    "marko-devtools": "^1.0.10",
+    "nodemon": "^1.11.0"
   },
   "dependencies": {
     "color": "^1.0.3",
     "dragula": "^3.7.2",
     "humane-js": "^3.2.2",
-    "normat": "^1.2.3",
-    "preact": "^8.1.0",
-    "preact-compat": "^3.16.0",
+    "marko-router": "^1.0.0",
+    "normalize.css": "^7.0.0",
     "react-color": "^2.11.1",
-    "react-router-dom": "^4.1.1"
+    "slug": "^0.9.1"
   }
 }

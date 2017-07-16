@@ -1,0 +1,15 @@
+/*import { h, Component } from "preact"
+import { renderHeader, renderCell } from "./columns"
+import { getStyle } from "./meter"
+*/
+
+<table if(input.combatants)>
+    <overlay-table-header settings=input.cells />
+    <tbody>
+        <overlay-table-row 
+            for(name, combatant in input.combatants | status-var=loop) encounter=input.encounter combatant=combatant index=loop.getIndex()
+            cells=input.cells
+            player=input.general.name
+        />
+    </tbody>
+</table>

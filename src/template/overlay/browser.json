@@ -1,0 +1,19 @@
+{
+    "dependencies": [
+        {
+            // PT Font
+            "type": "css",
+            "url": "//fonts.googleapis.com/css?family=PT+Mono|PT+Sans"
+        },
+        {
+            // Ionicon Icons
+            "type": "css",
+            "url": "//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+        },
+        "normalize.css/normalize.css",
+        "./style.css",
+        "../style.css",
+
+        "require-run: ./overlay.js"
+    ]
+}

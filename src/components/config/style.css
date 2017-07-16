@@ -1,0 +1,92 @@
+#window {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+#navigation {
+    flex: 1;
+    background-color: #203;
+    color: white;
+}
+
+.main {
+    flex: 4;
+    order: 2;
+    padding: 0 2rem;
+}
+
+.main>div {
+    height: 100%;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 1rem 2rem;
+}
+
+.main .title {
+    padding-left: 0;
+}
+
+.menu {
+    font-size: 1.5rem;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    color: #eee;
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+}
+
+.menu li:hover {
+    background: rgba(255, 255, 255, 0.2)
+}
+
+.menu li.separator:hover {
+    background: none
+}
+
+.pure-form-aligned .pure-control-group .label {
+    text-align: right;
+    display: inline-block;
+    vertical-align: middle;
+    width: 10em;
+    margin: 0 1em 0 0;
+}
+
+.pure-form select {
+    height: 2.5em;
+}
+
+.pure-form-aligned .pure-control-group .pure-checkbox,
+.pure-form-aligned .pure-control-group .pure-radio {
+    margin: .5em 1em .5em 0;
+    display: inline-block;
+    width: inherit;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    /* align-items align-content */
+}
+
+.form {
+    flex: 1;
+}
+
+.btnbar {
+    flex: 0 4rem;
+    background: #98a;
+    text-align: right;
+    padding: 1rem 1.5rem;
+    margin: 0 -2rem;
+}

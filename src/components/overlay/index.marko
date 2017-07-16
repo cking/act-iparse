@@ -1,0 +1,11 @@
+$ var resizeHandle = state.isLocked ? "hidden" : "visible"
+
+<div#window.blue>
+    <div.btngrp if(!state.isLocked)>
+        <button on-click("openConfigWindow")><span.ion-gear-a></span></button>
+    </div>
+
+    <overlay-header isActive=state.isActive encounter=state.encounter settings=state.settings.header />
+    <overlay-table encounter=state.encounter combatants=state.combatants cells=state.settings.cells meter=state.settings.meter general=state.settings.general />
+    <div#resize class=resizeHandle></div>
+</div>

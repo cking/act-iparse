@@ -1,0 +1,21 @@
+class {
+    onCreate() {
+        this.state = {
+            colors: {}
+        }
+    }
+    onColorChange(color, cmp) {
+        const colors = {}
+        colors[cmp.input.key] = color
+        this.setState({colors: Object.assign({}, this.state.colors, colors)})
+        this.emit("colorChange", this.state.colors)
+    }
+}    
+$ var prefix = input.prefix || "color"
+
+<fieldset>
+    <legend>${input.title}</legend>
+    <for(k,v in input.colors)>
+        <include("./color-input.marko", { key: k, name: v.name, prefix: prefix, defaultColor: v.default}) on-colorChange("onColorChange") />
+    </for>
+</fieldset>

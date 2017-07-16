@@ -1,0 +1,7 @@
+import columns from "../../../../../../ui/column"
+
+<thead>
+  <tr>
+    <th for(cell in input.settings) if(cell.enabled) class=[cell.opts.align] ${columns.style(cell)}>${cell.title}</th>
+  </tr>
+</thead>
