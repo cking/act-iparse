@@ -10,7 +10,7 @@ before_script:
 pages:
   script:
   - node script/build
-  - mkdir -p public/v2
+  - mkdir public
   - mv build public/v2
   
   artifacts:
