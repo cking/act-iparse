@@ -1,40 +1,43 @@
-"use strict"
+'use strict'
 
-require("marko/node-require").install()
+require('marko/node-require').install()
 
-const
-    fs = require("fs"),
-    path = require("path"),
-    lasso = require("lasso"),
-    settings = require(path.join(__dirname, "../lasso.config.json")),
-    overlayTemplate = require("../src/template/overlay/index.marko"),
-    configTemplate = require("../src/template/config/index.marko")
+const fs = require('fs-extra')
+const path = require('path')
+const settings = require(path.join(__dirname, '../lasso.config.json'))
+const overlayTemplate = require('../src/template/overlay/index.marko')
+const configTemplate = require('../src/template/config/index.marko')
 
-if (process.env.NODE_ENV !== "production") {
-    Object.assign(settings, {
-        "fingerprintsEnabled": false,
-        "includeSlotNames": true,
-    })
+if (process.env.NODE_ENV !== 'production') {
+  Object.assign(settings, {
+    fingerprintsEnabled: false,
+    includeSlotNames: true
+  })
 }
 
-lasso.configure(settings)
-const buildDir = path.join(__dirname, "..", "build")
+require('lasso').configure(settings)
+const images = path.join(__dirname, '..', 'img')
+const buildDir = path.join(__dirname, '..', 'build')
 
-try {
-    fs.mkdirSync(buildDir)
-} catch (e) { }
+async function renderTemplate (template, to, data = {}) {
+  const output = await template.render(data)
+  return fs.writeFile(to, output.toString(), { encoding: 'utf8' })
+}
 
-overlayTemplate.render({})
-.then(res => {
-    const outfile = path.join(buildDir, "index.html")
-    fs.writeFileSync(outfile, res.toString(), { encoding: "utf8" })
-    console.log(`HTML page successfully written to "${outfile}"!`)
+async function main () {
+  console.log('cleaning build dir...')
+  await fs.emptyDir(buildDir)
 
-    return configTemplate.render({})
-})
-.then(res => {
-    const outfile = path.join(buildDir, "config.html")
-    fs.writeFileSync(outfile, res.toString(), { encoding: "utf8" })
-    console.log(`HTML page successfully written to "${outfile}"!`)
-})
-.catch(err => console.error(err))
+  console.log('copying over images...')
+  await fs.copy(images, buildDir)
+
+  console.log('generating overlay page...')
+  await renderTemplate(overlayTemplate, path.join(buildDir, 'index.html'))
+
+  console.log('generating config page...')
+  await fs.ensureDir(path.join(buildDir, 'config'))
+  await renderTemplate(configTemplate, path.join(buildDir, 'config', 'index.html'))
+
+  console.log('finished!')
+}
+main()

@@ -13,6 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "cross-env": "^5.0.1",
+    "fs-extra": "^4.0.2",
     "http-server-spa": "^1.2.0",
     "lasso": "^2.11.12",
     "lasso-cli": "^2.0.7",
