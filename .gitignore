@@ -1,4 +1,6 @@
-script.js*
+*.marko.js
+build/
+.cache/
 
 # Logs
 logs
