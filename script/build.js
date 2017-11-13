@@ -1,5 +1,3 @@
-'use strict'
-
 require('marko/node-require').install()
 
 const fs = require('fs-extra')

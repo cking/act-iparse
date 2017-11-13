@@ -1,7 +1,3 @@
-"use strict"
+const newVersion = require('../../config').load()
 
-const newVersion = require("../../config").load()
-
-require("../../components/config/index.marko")
-    .render({newVersion})
-    .then(dom => dom.appendTo(document.body))
+require('../../components/config/index.marko').render({ newVersion }).then(dom => dom.appendTo(document.body))
