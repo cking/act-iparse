@@ -1,77 +1,77 @@
 .humane,
 .humane-flatty {
-    position: fixed;
-    transition: all 0.4s ease-in-out;
-    z-index: 100000;
+  position: fixed;
+  transition: all 0.4s ease-in-out;
+  z-index: 100000;
 }
 
 .humane,
 .humane-flatty {
-    font-family: Helvetica Neue, Helvetica, san-serif;
-    font-size: 16px;
-    top: 0;
-    left: 30%;
-    opacity: 0;
-    width: 40%;
-    color: #444;
-    padding: 10px;
-    text-align: center;
-    background-color: #fff;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    transform: translateY(-100px);
+  font-family: Helvetica Neue, Helvetica, san-serif;
+  font-size: 16px;
+  top: 0;
+  left: 30%;
+  opacity: 0;
+  width: 40%;
+  color: #444;
+  padding: 10px;
+  text-align: center;
+  background-color: #fff;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  transform: translateY(-100px);
 }
 
 .humane p,
 .humane-flatty p,
 .humane ul,
 .humane-flatty ul {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .humane ul,
 .humane-flatty ul {
-    list-style: none;
+  list-style: none;
 }
 
 .humane.humane-flatty-info,
 .humane-flatty.humane-flatty-info {
-    background-color: #3498db;
-    color: #FFF;
+  background-color: #3498db;
+  color: #fff;
 }
 
 .humane.humane-flatty-success,
 .humane-flatty.humane-flatty-success {
-    background-color: #18bc9c;
-    color: #FFF;
+  background-color: #18bc9c;
+  color: #fff;
 }
 
 .humane.humane-flatty-error,
 .humane-flatty.humane-flatty-error {
-    background-color: #e74c3c;
-    color: #FFF;
+  background-color: #e74c3c;
+  color: #fff;
 }
 
 .humane-animate,
 .humane-flatty.humane-flatty-animate {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .humane-animate:hover,
 .humane-flatty.humane-flatty-animate:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 
 .humane-js-animate,
 .humane-flatty.humane-flatty-js-animate {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .humane-js-animate:hover,
 .humane-flatty.humane-flatty-js-animate:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }
