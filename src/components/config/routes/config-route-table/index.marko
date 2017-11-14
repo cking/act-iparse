@@ -1,83 +1,5 @@
 $ const column = require("../../../../ui/column")
 import humane from "humane-js"
-
-class {
-    onCreate() {
-        this.state = {
-            cells: JSON.parse(localStorage.getItem("cells")),
-
-            details: null
-        }
-    }
-
-    onSubmit(ev, el) {
-        ev.preventDefault()
-        this.adjustCellOrder()
-
-        localStorage.setItem("cells", JSON.stringify(this.state.cells))
-
-        humane.log("Settings saved!")
-    }
-
-    onSubmitDetails(idx, ev, el) {
-        ev.preventDefault()
-
-        const column = require("../../../../ui/column")
-        const cell = this.state.cells[idx]
-        const col = column[cell.id]
-
-        const fields = Array.from(document.getElementsByTagName("form")[0].elements).filter(el => el.id)
-        fields.forEach(f => {
-            if (f.type == "checkbox") {
-                cell.opts[f.name] = f.checked
-            } else if (f.type == "radio") {
-                if (f.checked) {
-                    cell.opts[f.name] = f.value
-                }
-            } else {
-                cell.opts[f.name] = f.value
-            }
-        })
-
-        this.adjustCellOrder()
-        this.setState("details", null)
-    }
-
-    onMount() {
-        this.drake = require("dragula")([this.getEl("enabled"), this.getEl("disabled")], {})
-    }
-
-    onDestroy() {
-        if (this.drake) {
-            this.drake.destroy()
-        }
-    }
-
-    onDetails(cell) {
-        this.adjustCellOrder()
-        
-        console.log("cell details for", cell)
-        const idx = this.state.cells.findIndex(c => c.id == cell)
-        console.log("cell found at idx", idx)
-        this.setState("details", idx)
-    }
-
-    adjustCellOrder() {
-        const cells = []
-        const disabled = this.getEl("disabled")
-        const els = document.getElementsByClassName("cell")
-
-        Array.from(els).forEach(el => {
-            const idx = el.dataset.idx
-            this.state.cells[idx].enabled = el.parentNode != disabled
-            el.dataset.idx = cells.length
-            cells.push(this.state.cells[idx])
-        })
-
-        this.setState("cells", cells)
-    }
-}
-
 style {
     .dragger {
         padding: 0;
@@ -128,96 +50,68 @@ style {
         padding: 0;
     }
 }
-
-<form.content.pure-form.pure-form-aligned method="post" on-submit("onSubmit")>
-    <div.form>
-        <div.title><span.ion-stats-bars></span> Table</div>
-
-        <p>
-            Drag the available cells to the preferred location. The order of the cells represents the order in the overlay.
-        </p>
-
-        <fieldset>
-            <legend>Enabled</legend>
-            <ol.dragger key="enabled">
-                <for(cell in state.cells | status-var=loop)>
-                    <li.cell if(cell.enabled) data-key=cell.id data-idx=loop.getIndex()>
-                        $ var col = column[cell.id]
-                        <strong title=col.description>${col.name}</strong>
-                        <button type="button" on-click("onDetails", cell.id)><span.ion-gear-a></span></button>
-                    </li>
-                </for>
-            </ol>
-        </fieldset>
-
-        <fieldset>
-            <legend>Disabled</legend>
-            <ol.dragger key="disabled">
-                <for(cell in state.cells | status-var=loop)>
-                    <li.cell if(!cell.enabled) data-key=cell.id data-idx=loop.getIndex()>
-                        $ var col = column[cell.id]
-                        <strong title=col.description>${col.name}</strong>
-                        <button type="button" on-click("onDetails", cell.id)><span.ion-gear-a></span></button>
-                    </li>
-                </for>
-            </ol>
-        </fieldset>
-
-        <fieldset>
-            <if(state.details != null)>
-                $ var cell = state.cells[state.details]
-                $ var col = column[cell.id]
-                <legend>Details for ${col.name}</legend>
-                <p>${col.description}</p>
-
-                <div.pure-control-group>
-                    <label for="title">Table Header</label>
-                    <input id="title" type="text" name="title" value=cell.title />
-                    <span class="pure-form-message-inline">The title used in the overlay. Leave empty to hide the title</span>
-                </div>
-
-                <div.pure-control-group for(c in Object.keys(col.options))>
-                    $ var def = col.options[c], val = cell.opts[c]
-
-                    <if(def.type=="option")>
-                        <span.label>${def.name}</span>
-                        <for(k,v in def.values)>
-                            <label.pure-radio>
-                                <input type="radio" id=(c + "-" + k) name=(c + "-" + k) value=k checked=(val == k) /> ${v}
-                            </label>
-                        </for>
-                        <span class="pure-form-message-inline" if(def.description)>${def.description}</span>
-                    </if>
-                    <else-if(def.type=="checkbox")>
-                        <span.label>${def.name}</span>
-                        <label.pure-checkbox>
-                            <input type="checkbox" id=c name=c checked=val />
-                        </label>
-                        <span class="pure-form-message-inline" if(def.description)>${def.description}</span>
-                    </else-if>
-                    <else-if(def.type=="select")>
-                        <label for=(cell.id + "-" + c)>${def.name}</label>
-                        <select id=(cell.id + "-" + c) name=(cell.id + "-" + c)>
-                            <option for(k,v in def.values) value=k selected=(val == k)>${v}</option>
-                        </select>
-                        <span class="pure-form-message-inline" if(def.description)>${def.description}</span>
-                    </else-if>
-                    <else>
-                        ${c}: Unkown type ${def.type}
-                    </else>
-                </div>
-                
-                <div.pure-control-group>
-                    <button type="button" on-click("onSubmitDetails", state.details)>Update</button>
-                </div>
-            </if><else>
-                <legend>Cell Details</legend>
-                Click on the <span.ion-gear-a></span> gear icon to view detailed settings.
-            </else>
-        </fieldset>
-    </div>
-
-    <div.btnbar>
-        <button type="submit">Save</button>
-    </div>
-</form>
+form.content.pure-form.pure-form-aligned method="post" on-submit("onSubmit")
+  div.form
+    div.title
+      ---
+      <span.ion-stats-bars/>
+      Table
+      ---
+    p -- Drag the available cells to the preferred location. The order of the cells represents the order in the overlay.
+    fieldset
+      legend -- Enabled
+      ol.dragger key="enabled"
+        for(cell in state.cells | status-var=loop)
+          li.cell if(cell.enabled) data-key=cell.id data-idx=loop.getIndex()
+            $ var col = column[cell.id]
+            strong title=col.description -- ${col.name}
+            button type="button" on-click("onDetails", cell.id)
+              span.ion-gear-a
+    fieldset
+      legend -- Disabled
+      ol.dragger key="disabled"
+        for(cell in state.cells | status-var=loop)
+          li.cell if(!cell.enabled) data-key=cell.id data-idx=loop.getIndex()
+            $ var col = column[cell.id]
+            strong title=col.description -- ${col.name}
+            button type="button" on-click("onDetails", cell.id)
+              span.ion-gear-a
+    fieldset
+      if(state.details != null)
+        $ var cell = state.cells[state.details]
+        $ var col = column[cell.id]
+        legend -- Details for ${col.name}
+        p -- ${col.description}
+        div.pure-control-group
+          label for="title" -- Table Header
+          input id="title" type="text" name="title" value=cell.title
+          span class="pure-form-message-inline" -- The title used in the overlay. Leave empty to hide the title
+        div.pure-control-group for(c in Object.keys(col.options))
+          $ var def = col.options[c], val = cell.opts[c]
+          if(def.type=="option")
+            span.label -- ${def.name}
+            for(k,v in def.values)
+              label.pure-radio
+                input type="radio" id=((c + "-") + k) name=((c + "-") + k) value=k checked=(val == k)
+                -- ${v}
+            span class="pure-form-message-inline" if(def.description) -- ${def.description}
+          else-if(def.type=="checkbox")
+            span.label -- ${def.name}
+            label.pure-checkbox
+              input type="checkbox" id=c name=c checked=val
+            span class="pure-form-message-inline" if(def.description) -- ${def.description}
+          else-if(def.type=="select")
+            label for=((cell.id + "-") + c) -- ${def.name}
+            select id=((cell.id + "-") + c) name=((cell.id + "-") + c)
+              option for(k,v in def.values) value=k selected=(val == k) -- ${v}
+            span class="pure-form-message-inline" if(def.description) -- ${def.description}
+          else -- ${c}: Unkown type ${def.type}
+        div.pure-control-group
+          button type="button" on-click("onSubmitDetails", state.details) -- Update
+      else
+        legend -- Cell Details
+        -- Click on the
+        span.ion-gear-a
+        -- gear icon to view detailed settings.
+  div.btnbar
+    button type="submit" -- Save

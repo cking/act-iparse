@@ -1,112 +1,58 @@
 import humane from "humane-js"
-
-class {
-    onCreate() {
-        this.state = {
-            general: JSON.parse(localStorage.getItem("general")),
-            header: JSON.parse(localStorage.getItem("header")),
-        }
-    }
-
-    onSubmit(ev, el) {
-        ev.preventDefault()
-        this.setState({
-            general: {
-                name: el.name.value,
-                wsrelay: el.wsrelay.value,
-            },
-            header: {
-                time: el.time.checked,
-                highlight: el.highlight.checked,
-                target: el.target.checked,
-                stats: el.stats.value,
-                strongest: el.strongest.value,
-                deaths: el.deaths.checked,
-            }
-        })
-
-        localStorage.setItem("general", JSON.stringify(this.state.general))
-        localStorage.setItem("header", JSON.stringify(this.state.header))
-
-        humane.log("Settings saved!")
-    }
-}
-
-<form.content.pure-form.pure-form-aligned method="post" on-submit("onSubmit")>
-    <div.form>
-        <div.title><span.ion-gear-b></span> General</div>
-        <fieldset>
-            <legend>Miscellaneous</legend>
-
-            <div.pure-control-group>
-                <label for="customName">Your ACT Name</label>
-                <input id="customName" type="text" name="name" value=state.general.name />
-            </div>
-
-            <div.pure-control-group>
-                <label for="wsrelay">Websocket Relay</label>
-                <input id="wsrelay" type="text" name="wsrelay" value=state.general.wsrelay />
-                <div class="pure-form-message-inline">
-                    Setup a server using <a href="https://www.npmjs.com/package/wsrelay" target="_BLANK">wsrelay</a> to forward messages to other clients<br />
-                    <span if(state.general.wsrelay)>
-                        $ var wsrelay = state.general.wsrelay
-                        Share the link via <input type="text" class="pure-input-2-3" value="${location.protocol}//${
-                            location.hostname}${location.port?":"+location.port:""}${
-                            location.pathname.replace(/config\.html$/, "")}#${
-                            btoa(wsrelay)}" locked />
-                    </span>
-                </div>
-            </div>
-        </fieldset>
-
-        <fieldset>
-            <legend>Header</legend>
-
-            <div.pure-control-group>
-                <label for="time">Show running time</label>
-                <input id="time" type="checkbox" name="time" checked=state.header.time />
-            </div>
-
-            <div.pure-control-group>
-                <label for="highlight">Highlight fight</label>
-                <input id="highlight" type="checkbox" name="highlight" checked=state.header.highlight />
-                <span class="pure-form-message-inline">Changes the color of the running time, if in an active encounter</span>
-            </div>
-
-            <div.pure-control-group>
-                <label for="target">Show target</label>
-                <input id="target" type="checkbox" name="target" checked=state.header.target />
-            </div>
-
-            <div.pure-control-group>
-                <label for="stats">DPS / HPS Statistics</label>
-                <select id="stats" name="stats">
-                    <option value="dps" selected=(state.header.stats=="dps")>Show DPS</option>
-                    <option value="hps" selected=(state.header.stats=="hps")>Show HPS</option>
-                    <option value="dps-hps" selected=(state.header.stats=="dps-hps")>Show DPS and HPS</option>
-                    <option value="" selected=(state.header.stats=="")>Show Nothing</option>
-                </select>
-            </div>
-
-            <div.pure-control-group>
-                <label for="strongest">Strongest action</label>
-                <select id="strongest" name="strongest">
-                    <option value="hit" selected=(state.header.strongest=="hit")>Strongest Hit</option>
-                    <option value="heal" selected=(state.header.strongest=="heal")>Strongest Heal</option>
-                    <option value="hit-heal" selected=(state.header.strongest=="hit-heal")>Strongest Hit and Heal</option>
-                    <option value="" selected=(state.header.strongest=="")>Show nothing</option>
-                </select>
-            </div>
-
-            <div.pure-control-group>
-                <label for="deaths">Show player deaths</label>
-                <input id="deaths" type="checkbox" name="deaths" checked=state.header.deaths />
-            </div>
-        </fieldset>
-    </div>
-
-
-    <div.btnbar>
-        <button type="submit">Save</button>
-    </div>
-</form>
+form.content.pure-form.pure-form-aligned method="post" on-submit("onSubmit")
+  div.form
+    div.title
+      ---
+      <span.ion-gear-b/>
+      General
+      ---
+    fieldset
+      legend -- Miscellaneous
+      div.pure-control-group
+        label for="customName" -- Your ACT Name
+        input id="customName" type="text" name="name" value=state.general.name
+      div.pure-control-group
+        label for="wsrelay" -- Websocket Relay
+        input id="wsrelay" type="text" name="wsrelay" value=state.general.wsrelay
+        div class="pure-form-message-inline"
+          ---
+          Setup a server using
+          <a href="https://www.npmjs.com/package/wsrelay" target="_BLANK">wsrelay</a>
+          to forward messages to other clients<br/>
+          <span if(state.general.wsrelay)>
+            $ var wsrelay = state.general.wsrelay
+            Share the link via
+            <input type="text" class="pure-input-2-3" value=((((((location.protocol + "//") + location.hostname) + (location.port ? ":" + location.port : "")) + location.pathname.replace(/config\/(.*)/, "")) + "#") + btoa(wsrelay)) locked/>
+          </span>
+          ---
+    fieldset
+      legend -- Header
+      div.pure-control-group
+        label for="time" -- Show running time
+        input id="time" type="checkbox" name="time" checked=state.header.time
+      div.pure-control-group
+        label for="highlight" -- Highlight fight
+        input id="highlight" type="checkbox" name="highlight" checked=state.header.highlight
+        span class="pure-form-message-inline" -- Changes the color of the running time, if in an active encounter
+      div.pure-control-group
+        label for="target" -- Show target
+        input id="target" type="checkbox" name="target" checked=state.header.target
+      div.pure-control-group
+        label for="stats" -- DPS / HPS Statistics
+        select id="stats" name="stats"
+          option value="dps" selected=(state.header.stats == "dps") -- Show DPS
+          option value="hps" selected=(state.header.stats == "hps") -- Show HPS
+          option value="dps-hps" selected=(state.header.stats == "dps-hps") -- Show DPS and HPS
+          option value="" selected=(state.header.stats == "") -- Show Nothing
+      div.pure-control-group
+        label for="strongest" -- Strongest action
+        select id="strongest" name="strongest"
+          option value="hit" selected=(state.header.strongest == "hit") -- Strongest Hit
+          option value="heal" selected=(state.header.strongest == "heal") -- Strongest Heal
+          option value="hit-heal" selected=(state.header.strongest == "hit-heal") -- Strongest Hit and Heal
+          option value="" selected=(state.header.strongest == "") -- Show nothing
+      div.pure-control-group
+        label for="deaths" -- Show player deaths
+        input id="deaths" type="checkbox" name="deaths" checked=state.header.deaths
+  div.btnbar
+    button type="submit" -- Save

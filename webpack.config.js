@@ -11,7 +11,7 @@ module.exports = {
   context: srcDir,
   entry: {
     overlay: ['./overlay.styl', './overlay.js'],
-    config: [],
+    config: ['./config.styl', './config.js'],
     vendor: ['./global.styl']
   },
   output: {

@@ -1,5 +1,4 @@
-import cl from "../../../../changelog"
-
+import cl from "../../../../lib/changelog"
 style {
     .about span {
         display: block;
@@ -29,21 +28,20 @@ style {
         clear: both;
     }
 }
-
-<div.title><span.ion-information-circled></span> About</div>
-<div.about>
-    <span>Written by</span>
-    <img.ava src="../../images/avatar.jpg">
-    <a.name href="http://eu.finalfantasyxiv.com/lodestone/character/9384803/" target="_blank">Vanthia Orcus</a>
-    <div.world>Cerberus</div>
-</div>
-
-<h2>Changelog</h2>
-<ul>
-    <li for(version in cl.list)>
-        <strong>${version.name}</strong> <em>(${version.date})</em>
-        <ol>
-            <li for(entry in version.changes)>${entry}</li>
-        </ol>
-    </li>
-</ul>
+div.title
+  ---
+  <span.ion-information-circled/>
+  About
+  ---
+div.about
+  span -- Written by
+  img.ava src="../../images/avatar.jpg"
+  a.name href="http://eu.finalfantasyxiv.com/lodestone/character/9384803/" target="_blank" -- Vanthia Orcus
+  div.world -- Cerberus
+h2 -- Changelog
+ul
+  li for(version in cl.list)
+    strong -- ${version.name}
+    em -- (${version.date})
+    ol
+      li for(entry in version.changes) -- ${entry}
