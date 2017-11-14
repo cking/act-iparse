@@ -64,7 +64,10 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin('styles.css'),
+    new ExtractTextPlugin({
+      filename: '[name].css',
+      disable: indev
+    }),
     new HtmlWebpackPlugin({
       title: 'IcoParse',
       filename: 'index.html',
