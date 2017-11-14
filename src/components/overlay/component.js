@@ -28,7 +28,7 @@ module.exports = class {
       const url = atob(hash.substr(1))
       this.receiver = new WebSocket((url.substr(0, 2) != 'ws' ? 'ws://' : '') + url)
       this.receiver.onmessage = evt => {
-        this.overlayDataUpdate({ detail: JSON.parse(evt.data) })
+        this.onOverlayDataUpdate({ detail: JSON.parse(evt.data) })
       }
     }
 
