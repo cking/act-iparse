@@ -5,8 +5,12 @@ exports.textures = require('./texture')
 exports.colors = require('./color')
 
 exports.render = function (ctx, cbt, settings) {
-  ctx.canvas.width = ctx.canvas.clientWidth
-  ctx.canvas.height = ctx.canvas.clientHeight
+  if (!ctx.canvas.width && ctx.canvas.clientWidth) {
+    ctx.canvas.width = ctx.canvas.clientWidth
+  }
+  if (!ctx.canvas.height && ctx.canvas.clientHeight) {
+    ctx.canvas.height = ctx.canvas.clientHeight
+  }
 
   const overwrite = Array.isArray(settings.overwrites)
     ? settings.overwrites.find(ow => {
