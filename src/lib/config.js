@@ -1,6 +1,6 @@
 const changelog = require('./changelog')
-const column = require('./ui/column')
-const uiMeter = require('./ui/meter')
+const column = require('../ui/column')
+const uiMeter = require('../ui/meter')
 const humane = require('humane-js')
 
 function arrayToObject (arr, key, val) {

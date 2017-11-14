@@ -1,4 +1,4 @@
-const jobType = require('../../util').jobType
+const jobType = require('../../lib/util').jobType
 const util = require('./util.js')
 const iconFromCombatant = util.iconFromCombatant,
   jobAbbrToLong = util.jobAbbrToLong

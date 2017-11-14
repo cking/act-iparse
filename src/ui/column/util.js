@@ -1,4 +1,4 @@
-const util = require('../../util')
+const util = require('../../lib/util')
 const jobs = util.jobs
 // TODO: shorten skill names
 

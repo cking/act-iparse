@@ -1,4 +1,4 @@
-const util = require('../../util')
+const util = require('../../lib/util')
 
 exports.styles = require('./style')
 exports.textures = require('./texture')

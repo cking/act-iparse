@@ -1,6 +1,6 @@
 const colorInputPartial = require('./partial/color-input.marko')
 const settingsPartial = require('./partial/settings.marko')
-const util = require('../../util')
+const util = require('../../lib/util')
 
 function colorRandom () {
   const rand = parseInt(Math.random() * 255)
