@@ -1,7 +1,0 @@
-{
-    "outputDir": "./build",
-    "urlPrefix": "./",
-    "plugins": [
-        "lasso-marko"
-    ]
-}
