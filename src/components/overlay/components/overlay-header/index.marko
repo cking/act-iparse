@@ -6,12 +6,12 @@ div#header.orange
     if(input.settings.target) -- ${encounter.title}:&nbsp;
     span.blue if(input.settings.stats || input.settings.strongest)
       if(input.settings.stats)
-        if(input.settings.stats.hit) -- ${encounter.ENCDPS} DPS&nbsp;
-        if(input.settings.stats.hit && input.settings.stats.heal) -- /&nbsp;
-        if(input.settings.stats.heal) -- ${encounter.ENCHPS} HPS&nbsp;
+        if(input.settings.stats.indexOf("dps") >= 0) -- ${encounter.ENCDPS} DPS&nbsp;
+        if(input.settings.stats.indexOf("-") >= 0) -- /&nbsp;
+        if(input.settings.stats.indexOf("hps") >= 0) -- ${encounter.ENCHPS} HPS&nbsp;
       if(input.settings.stats && input.settings.strongest) -- -&nbsp;
       if(input.settings.strongest)
-        if(input.settings.strongest.hit) -- ${encounter.maxhit}&nbsp;
-        if(input.settings.strongest.hit && input.settings.strongest.heal) -- /&nbsp;
-        if(input.settings.strongest.heal) -- ${encounter.maxheal}&nbsp;
+        if(input.settings.strongest.indexOf("dps") >= 0) -- ${encounter.maxhit}&nbsp;
+        if(input.settings.strongest.indexOf("-")) -- /&nbsp;
+        if(input.settings.strongest.indexOf("hps") >= 0) -- ${encounter.maxheal}&nbsp;
     if(input.settings.deaths) -- ${encounter.deaths}†
