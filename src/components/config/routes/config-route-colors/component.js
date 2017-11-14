@@ -1,3 +1,5 @@
+const meter = require('../../../../ui/meter')
+
 module.exports = class {
   onCreate () {
     this.state = {
