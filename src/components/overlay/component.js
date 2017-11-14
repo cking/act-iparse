@@ -72,8 +72,8 @@ module.exports = class {
   // local storage update, whoop
   onStorage (e) {
     const newVal = JSON.parse(e.newValue)
-    const oldRelay = this.state.general.wsrelay
-    this.state[e.key] = newVal
+    const oldRelay = this.state.settings.general.wsrelay
+    this.state.settings = Object.assign({}, this.state.settings, { [e.key]: newVal })
 
     if (e.key === 'general') {
       if (newVal.wsrelay !== oldRelay) {
