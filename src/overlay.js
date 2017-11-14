@@ -1,3 +1,5 @@
 const newVersion = require('./config').load()
 
-require('./components/overlay/index.marko').render({ newVersion }).then(dom => dom.appendTo(document.body))
+document.addEventListener('DOMContentLoaded', () =>
+  require('./components/overlay/index.marko').render({ newVersion }).then(dom => dom.appendTo(document.body))
+)
