@@ -123,7 +123,7 @@ exports.job = {
 
     if (args.cell.opts.icon) {
       out.html(
-        `<img src="./icons/${iconFromCombatant(
+        `<img src="/img/icons/${iconFromCombatant(
           abbr
         )}.png" style="height: 1.5rem; width: auto; position: absolute; margin-top: -0.15rem" />`
       )
