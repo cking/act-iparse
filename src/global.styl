@@ -1,0 +1,81 @@
+@import url('//fonts.googleapis.com/css?family=PT+Mono|PT+Sans')
+@import url('//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
+@import url('~normalize.css/normalize.css')
+
+.humane,
+.humane-flatty {
+  position: fixed
+  z-index: 100000
+  transition: all .4s ease-in-out
+}
+
+.humane,
+.humane-flatty {
+  top: 0
+  left: 30%
+  padding: 10px
+  width: 40%
+  border-bottom-right-radius: 3px
+  border-bottom-left-radius: 3px
+  background-color: #fff
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .5)
+  color: #444
+  text-align: center
+  font-size: 16px
+  font-family: Helvetica Neue, Helvetica, sans-serif
+  opacity: 0
+  transform: translateY(-100px)
+}
+
+.humane p,
+.humane-flatty p,
+.humane ul,
+.humane-flatty ul {
+  margin: 0
+  padding: 0
+}
+
+.humane ul,
+.humane-flatty ul {
+  list-style: none
+}
+
+.humane.humane-flatty-info,
+.humane-flatty.humane-flatty-info {
+  background-color: #3498db
+  color: #fff
+}
+
+.humane.humane-flatty-success,
+.humane-flatty.humane-flatty-success {
+  background-color: #18bc9c
+  color: #fff
+}
+
+.humane.humane-flatty-error,
+.humane-flatty.humane-flatty-error {
+  background-color: #e74c3c
+  color: #fff
+}
+
+.humane-animate,
+.humane-flatty.humane-flatty-animate {
+  opacity: 1
+  transform: translateY(0)
+}
+
+.humane-animate:hover,
+.humane-flatty.humane-flatty-animate:hover {
+  opacity: .7
+}
+
+.humane-js-animate,
+.humane-flatty.humane-flatty-js-animate {
+  opacity: 1
+  transform: translateY(0)
+}
+
+.humane-js-animate:hover,
+.humane-flatty.humane-flatty-js-animate:hover {
+  opacity: .7
+}

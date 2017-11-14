@@ -26,7 +26,6 @@ class {
         this.emit("colorChange", color)
     }
 }
-
 style {
     .pure-color-picker {
         background: rgba(0, 0, 0, 0.2);
@@ -71,7 +70,7 @@ style {
         box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 8px 16px rgba(0,0,0,.15);
     }
 
-    
+
     .saturation: {
         width: 100%;
         padding-bottom: 55%;
@@ -81,20 +80,20 @@ style {
     }
 
     .saturation .color {
-        absolute: '0px 0px 0px 0px',
-        background: `hsl(${ this.props.hsl.h },100%, 50%)`,
-        borderRadius: this.props.radius,
+        absolute: '0px 0px 0px 0px';
+        background: `hsl(${ this.props.hsl.h },100%, 50%)`;
+        border-radius: this.props.radius;
     }
 }
-
-<div.pure-control-group>
-    <label for-key="input" key="label">${input.name}</label>
-    <input.swatch key="input" type="text" name="color" value=state.color on-chang("onColorChange", null)>
-    <!--<div.swatch on-click("toggleDisplay", true)>
-        <div.color style={ backgroundColor: state.color } />
-    </div>
-    <div.popover if(state.viewPicker)>
-        <div.cover on-click("toggleDisplay", false) />
-        <picker />
-    </div>-->
-</div>
+div.pure-control-group
+  label for-key="input" key="label" -- ${input.name}
+  input.swatch key="input" type="text" name="color" value=state.color on-chang("onColorChange", null)
+  <!--
+  <div.swatch on-click("toggleDisplay", true)>
+  <div.color style={ backgroundColor: state.color } />
+  </div>
+  <div.popover if(state.viewPicker)>
+  <div.cover on-click("toggleDisplay", false) />
+  <picker />
+  </div>
+  -->
