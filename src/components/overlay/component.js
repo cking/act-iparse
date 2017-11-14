@@ -9,15 +9,20 @@ module.exports = class {
         header: JSON.parse(localStorage.getItem('header')),
         cells: JSON.parse(localStorage.getItem('cells')),
         meter: JSON.parse(localStorage.getItem('meter'))
-      }
+      },
+      isActive: false,
+      encounter: {},
+      combatants: {}
     }
 
     this.configWindow = null
 
+    // force bindings
     this.onOverlayStateUpdate = this.onOverlayStateUpdate.bind(this)
     this.onOverlayDataUpdate = this.onOverlayDataUpdate.bind(this)
     this.onStorage = this.onStorage.bind(this)
 
+    // parse hash, for mobile usage
     const hash = window.location.hash
     if (hash.length > 1) {
       const url = atob(hash.substr(1))
@@ -27,45 +32,57 @@ module.exports = class {
       }
     }
 
+    // connect to the websocket as master
+    this.connectWebsocket()
+  }
+
+  connectWebsocket () {
     if (this.state.settings.general.wsrelay) {
-      this.socket = new WebSocket(this.state.settings.general.wsrelay)
+      this.socket = new WebSocket(
+        (this.state.settings.general.wsrelay.substr(0, 2) != 'ws' ? 'ws://' : '') + this.state.settings.general.wsrelay
+      )
     }
   }
 
+  // open the config window
   openConfigWindow () {
     if (this.configWindow && this.configWindow.closed) this.configWindow = null
-    if (!this.configWindow) this.configWindow = window.open('config.html', '_blank', 'height=560,width=720')
+    if (!this.configWindow) this.configWindow = window.open('config', '_blank', 'height=560,width=720')
     this.configWindow.focus()
     humane.log('Configuration screen opened, check your background windows')
   }
 
+  // update the isLocket status
   onOverlayStateUpdate (e) {
-    this.setState('isLocked', e.detail.isLocked)
+    this.state.isLocked = e.detail.isLocked
   }
 
+  // update current frame
   onOverlayDataUpdate (e) {
-    this.setState({
-      isActive: e.detail.isActive,
-      encounter: e.detail.Encounter,
-      combatants: e.detail.Combatant
-    })
+    this.state.isActive = e.detail.isActive
+    this.state.encounter = e.detail.Encounter
+    this.state.combatants = e.detail.Combatant
 
-    if (this.socket) {
+    // send frame to the websocket, if socket is opened
+    if (this.socket && this.socket.readyState === 1) {
       this.socket.send(JSON.stringify(e.detail))
     }
   }
 
+  // local storage update, whoop
   onStorage (e) {
     const newVal = JSON.parse(e.newValue)
+    const oldRelay = this.state.general.wsrelay
+    this.state[e.key] = newVal
+
     if (e.key === 'general') {
-      if (newVal.wsrelay !== this.state.general.wsrelay && newVal.wsrelay) {
-        this.socket = new WebSocket(newVal.wsrelay)
+      if (newVal.wsrelay !== oldRelay) {
+        this.connectWebsocket()
       }
     }
-
-    this.setState(e.key, newVal)
   }
 
+  // connect all listeners
   onMount () {
     document.addEventListener('onOverlayStateUpdate', this.onOverlayStateUpdate)
     document.addEventListener('onOverlayDataUpdate', this.onOverlayDataUpdate)
@@ -77,6 +94,7 @@ module.exports = class {
     }
   }
 
+  // disconnect all listeners
   onDestroy () {
     document.removeEventListener('onOverlayStateUpdate', this.onOverlayStateUpdate)
     document.removeEventListener('onOverlayDataUpdate', this.onOverlayDataUpdate)

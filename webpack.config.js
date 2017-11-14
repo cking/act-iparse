@@ -29,7 +29,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['babel-preset-es2017']
+            presets: ['babel-preset-es2017'],
+            plugins: ['transform-strict-mode']
           }
         }
       },
@@ -71,12 +72,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'IcoParse',
       filename: 'index.html',
-      excludeChunks: 'config'
+      excludeChunks: ['config']
     }),
     new HtmlWebpackPlugin({
       title: 'IcoParse Config',
       filename: 'config/index.html',
-      excludeChunks: 'overlay'
+      excludeChunks: ['overlay']
     }),
     indev ? new webpack.HotModuleReplacementPlugin({}) : null
   ]
