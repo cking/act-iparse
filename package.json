@@ -4,9 +4,8 @@
   "description": "ffxiv act ico parse",
   "main": "script.js",
   "scripts": {
-    "watch": "cross-env NODE_ENV=development nodemon -e js,marko,css -w ./src -i '*.marko.js' ./script/build.js",
-    "start": "cross-env NODE_ENV=production node ./script/build.js",
-    "serve": "http-server-spa build index.html 3000",
+    "watch": "webpack-dev-server -d",
+    "build": "webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Christopher König <criss@paars.de>",
