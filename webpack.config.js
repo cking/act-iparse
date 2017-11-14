@@ -1,9 +1,7 @@
 const path = require('path')
 const srcDir = path.join(__dirname, 'src')
 const dstDir = path.join(__dirname, 'build')
-const indev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 
-const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
@@ -17,8 +15,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: dstDir,
-    publicPath: '/',
-    pathinfo: indev
+    publicPath: '/'
   },
 
   module: {
@@ -57,8 +54,7 @@ module.exports = {
     extensions: ['.marko', '.js']
   },
 
-  cache: !indev,
-  devtool: indev ? 'cheap-module-eval-source-map' : 'cheap-module-source-map',
+  devtool: 'cheap-module-source-map',
 
   devServer: {
     contentBase: dstDir
@@ -66,8 +62,7 @@ module.exports = {
 
   plugins: [
     new ExtractTextPlugin({
-      filename: '[name].css',
-      disable: indev
+      filename: '[name].css'
     }),
     new HtmlWebpackPlugin({
       title: 'IcoParse',
@@ -78,7 +73,6 @@ module.exports = {
       title: 'IcoParse Config',
       filename: 'config/index.html',
       excludeChunks: ['overlay']
-    }),
-    indev ? new webpack.HotModuleReplacementPlugin({}) : null
+    })
   ]
 }
