@@ -36,6 +36,8 @@ module.exports = class {
     })
 
     const canvas = this.getEl('preview')
+    canvas.width = canvas.clientWidth
+    canvas.height = canvas.clientHeight
     const context = canvas.getContext('2d')
     meter.render(context, Object.assign({ 'damage%': '80%' }, this.state.example), this.state.meter)
   }
