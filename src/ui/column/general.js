@@ -16,7 +16,7 @@ exports.position = {
       values: { fl: 'Left', fc: 'Center', fr: 'Right' }
     }
   },
-  style: 'width: 1.5rem; max-width: 3rem',
+  style: 'flex: 0 3rem',
   render (out, args) {
     out.text(`${args.index + 1}.`)
   }
@@ -116,7 +116,7 @@ exports.job = {
       width += 1.5
     }
 
-    return 'width: ' + width + 'rem'
+    return 'flex: 0 ' + width + 'rem'
   },
   render: (out, args) => {
     const abbr = (args.combatant.Job || args.combatant.name).toLowerCase()
@@ -125,7 +125,7 @@ exports.job = {
       out.html(
         `<img src="/img/icons/${iconFromCombatant(
           abbr
-        )}.png" style="height: 1.5rem; width: auto; position: absolute; margin-top: -0.15rem" />`
+        )}.png" style="height: 1.5rem; flex: 0 auto; position: absolute; margin-top: -0.15rem" />`
       )
       out.beginElement('span', { style: 'padding-left: 1.6rem' })
     }
@@ -157,7 +157,7 @@ exports.death = {
       values: { fl: 'Left', fc: 'Center', fr: 'Right' }
     }
   },
-  style: 'width: 2rem;',
+  style: 'flex: 0 2rem;',
   render (out, args) {
     return out.text(args.combatant.deaths)
   }
@@ -189,7 +189,7 @@ exports.critall = {
       values: { rel: 'In Percent', abs: 'Absolute number of hits' }
     }
   },
-  style: 'width: 4rem',
+  style: 'flex: 0 4rem',
   render: (out, args) => {
     if (args.cell.opts.monospace) {
       out.beginElement('span', { class: 'mono' })
@@ -242,10 +242,10 @@ exports.maxall = {
   },
   style (cell) {
     if (cell.opts.style == 'damage') {
-      return cell.opts.round ? 'width: 4rem' : 'width: 5rem'
+      return cell.opts.round ? 'flex: 0 4rem' : 'flex: 0 5rem'
     }
 
-    return 'width: 12rem'
+    return 'flex: 0 12rem'
   },
   render: (out, args) => {
     let max = args.combatant.maxhit

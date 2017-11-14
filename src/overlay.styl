@@ -46,21 +46,31 @@ html {
   font-weight: 300
 }
 
-table {
+.combatants {
   width: 100%
-  border-collapse: collapse
-  table-layout: fixed
-}
 
-thead {
-  border-bottom: 1px solid #ded7be
-}
+  .row {
+    display: flex
 
-th,
-td {
-  overflow: hidden
-  padding: .25rem .5rem
-  text-overflow: ellipsis
+    .cell {
+      flex: 1
+      overflow: hidden
+      padding: .25rem .5rem
+      text-overflow: ellipsis
+    }
+  }
+
+  .row:nth-child(even) {
+    background-color: rgba(255, 255, 255, .4)
+  }
+
+  .head {
+    border-bottom: 1px solid #ded7be
+
+    .cell {
+      font-weight: bold
+    }
+  }
 }
 
 .fl {
@@ -77,10 +87,6 @@ td {
 
 .mono {
   font-family: 'PT Mono'
-}
-
-tr:nth-child(even) {
-  background-color: rgba(255, 255, 255, .4)
 }
 
 .player {

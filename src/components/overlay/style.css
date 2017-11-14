@@ -15,10 +15,6 @@
   background: #e2ebf5;
   border-radius: 50%;
   box-shadow: 0 0 10px 1px #217aa2;
-
-  &.hidden {
-    display: none;
-  }
 }
 
 .btngrp {

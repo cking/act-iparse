@@ -19,7 +19,7 @@ exports.dps = {
       type: 'checkbox'
     }
   },
-  style: 'width: 4rem',
+  style: 'flex: 0 4rem',
   render (out, args) {
     if (args.cell.opts.monospace) {
       out.beginElement('span', { class: 'mono' })
@@ -60,8 +60,8 @@ exports.damage = {
     }
   },
   style (cell) {
-    if (cell.opts.style === 'long') return 'width: 7rem'
-    return 'width: 4rem'
+    if (cell.opts.style === 'long') return 'flex: 0 7rem'
+    return 'flex: 0 4rem'
   },
   render (out, args) {
     if (args.cell.opts.monospace) {
@@ -107,10 +107,10 @@ exports.maxhit = {
   },
   style (cell) {
     if (cell.opts.style == 'damage') {
-      return cell.opts.round ? 'width: 4rem' : 'width: 5rem'
+      return cell.opts.round ? 'flex: 0 4rem' : 'flex: 0 5rem'
     }
 
-    return 'width: 12rem'
+    return 'flex: 0 12rem'
   },
   render: (out, args) => {
     const maxSplit = args.combatant.maxhit.split('-')
@@ -164,7 +164,7 @@ exports.crithit = {
       values: { rel: 'In Percent', abs: 'Absolute number of hits' }
     }
   },
-  style: 'width: 4rem',
+  style: 'flex: 0 4rem',
   render: (out, args) => {
     if (args.cell.opts.monospace) {
       out.beginElement('span', { class: 'mono' })
@@ -208,7 +208,7 @@ exports.directhit = {
       values: { rel: 'In Percent', abs: 'Absolute number of hits' }
     }
   },
-  style: 'width: 4rem',
+  style: 'flex: 0 4rem',
   render: (out, args) => {
     if (args.cell.opts.monospace) {
       out.beginElement('span', { class: 'mono' })
@@ -252,7 +252,7 @@ exports.critdirecthit = {
       values: { rel: 'In Percent', abs: 'Absolute number of hits' }
     }
   },
-  style: 'width: 4rem',
+  style: 'flex: 0 4rem',
   render: (out, args) => {
     if (args.cell.opts.monospace) {
       out.beginElement('span', { class: 'mono' })

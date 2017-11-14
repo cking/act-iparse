@@ -1,4 +1,5 @@
-table if(input.combatants)
+div.combatants if(input.combatants)
+  $ console.log(input)
   overlay-table-header settings=input.cells
-  tbody
+  div.body
     overlay-table-row for(name, combatant in input.combatants | status-var=loop) encounter=input.encounter combatant=combatant index=loop.getIndex() cells=input.cells player=input.general.name

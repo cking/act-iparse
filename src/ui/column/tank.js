@@ -19,7 +19,7 @@ exports.tdps = {
       type: 'checkbox'
     }
   ],
-  style: 'width: 4rem',
+  style: 'flex: 0 4rem',
   render (out, args) {
     if (args.cell.opts.monospace) {
       out.beginElement('span', { class: 'mono' })
@@ -61,9 +61,9 @@ exports.taken = {
   },
   style (cell) {
     if (cell.opts.style !== 'percentage') {
-      return 'width: 7rem'
+      return 'flex: 0 7rem'
     } else {
-      return 'width: 4rem'
+      return 'flex: 0 4rem'
     }
   },
   render (out, args) {
@@ -102,7 +102,7 @@ exports.rhps = {
       type: 'checkbox'
     }
   },
-  style: 'width: 4rem',
+  style: 'flex: 0 4rem',
   render (out, args) {
     if (args.cell.opts.monospace) {
       out.beginElement('span', { class: 'mono' })
@@ -144,9 +144,9 @@ exports.received = {
   },
   style (cell) {
     if (cell.opts.style !== 'percentage') {
-      return 'width: 7rem'
+      return 'flex: 0 7rem'
     } else {
-      return 'width: 4rem'
+      return 'flex: 0 4rem'
     }
   },
   render (out, args) {
@@ -185,7 +185,7 @@ exports.parry = {
       type: 'checkbox'
     }
   },
-  style: 'width: 4rem',
+  style: 'flex: 0 4rem',
   render (out, args) {
     if (args.cell.opts.monospace) {
       out.beginElement('span', { class: 'mono' })
@@ -218,7 +218,7 @@ exports.block = {
       type: 'checkbox'
     }
   },
-  style: 'width: 4rem',
+  style: 'flex: 0 4rem',
   render (out, args) {
     if (args.cell.opts.monospace) {
       out.beginElement('span', { class: 'mono' })

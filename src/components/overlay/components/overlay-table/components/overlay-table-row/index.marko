@@ -2,10 +2,10 @@ import columns from "../../../../../../ui/column"
 import slugger from "slug"
 $ var cls = [slugger(input.combatant.name).toLowerCase()]
 $ if (input.player === input.combatant.name) cls.push("player")
-tr class=cls key="trrow" style={backgroundRepeat: "no-repeat"}
+div class=["row", cls] key="trrow" style={backgroundRepeat: "no-repeat"}
   canvas style="display: none" key="canvas"
   for(cell in input.cells)
-    td if(cell.enabled) class=[cell.opts.align]
+    div.cell if(cell.enabled) class=[cell.opts.align] ${columns.style(cell)}
       include(columns.render, {
                 cell: cell,
                 encounter: input.encounter,

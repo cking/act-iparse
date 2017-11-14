@@ -23,7 +23,7 @@ exports.accuracy = {
       type: 'checkbox'
     }
   },
-  style: 'width: 4rem',
+  style: 'flex: 0 4rem',
   render (out, args) {
     if (args.cell.opts.monospace) {
       out.beginElement('span', { class: 'mono' })
@@ -62,7 +62,7 @@ exports.miss = {
       type: 'checkbox'
     }
   },
-  style: 'width: 3rem',
+  style: 'flex: 0 3rem',
   render (out, args) {
     if (args.cell.opts.monospace) {
       out.beginElement('span', { class: 'mono' })
