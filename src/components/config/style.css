@@ -13,7 +13,6 @@
 .main {
   flex: 4;
   order: 2;
-  padding: 0 2rem;
 }
 
 .main > div {
