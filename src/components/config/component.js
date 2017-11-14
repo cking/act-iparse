@@ -9,10 +9,10 @@ module.exports = class {
       },
 
       routes: [
-        { path: '/', component: require('./routes/config-route-general/index.marko') },
-        { path: '/table', component: require('./routes/config-route-table/index.marko') },
-        { path: '/colors', component: require('./routes/config-route-colors/index.marko') },
-        { path: '/about', component: require('./routes/config-route-about/index.marko') }
+        { path: '/config/', component: require('./routes/config-route-general/index.marko') },
+        { path: '/config/table', component: require('./routes/config-route-table/index.marko') },
+        { path: '/config/colors', component: require('./routes/config-route-colors/index.marko') },
+        { path: '/config/about', component: require('./routes/config-route-about/index.marko') }
       ]
     }
   }
