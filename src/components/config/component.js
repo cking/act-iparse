@@ -1,5 +1,3 @@
-const markoRouter = require('marko-router')
-
 module.exports = class {
   onCreate () {
     this.state = {
@@ -20,9 +18,4 @@ module.exports = class {
   }
 
   onMount () {}
-
-  goto (page) {
-    console.log('page transition to', page)
-    markoRouter.goTo(page)
-  }
 }

@@ -4,37 +4,43 @@ div#window
       -- <span.ion-settings/>Settings
     nav
       ul.menu
-        li on-click("goto", "general")
-          ---
-          <span.ion-gear-b/>
-          General
-          ---
-        li on-click("goto", "table")
-          ---
-          <span.ion-stats-bars/>
-          Table
-          ---
-        li on-click("goto", "colors")
-          ---
-          <span.ion-paintbrush/>
-          Colors
-          ---
+        li
+          router-link path="/"
+            ---
+            <span.ion-gear-b/>
+            General
+            ---
+        li
+          router-link path="/table"
+            ---
+            <span.ion-stats-bars/>
+            Table
+            ---
+        li
+          router-link path="/colors"
+            ---
+            <span.ion-paintbrush/>
+            Colors
+            ---
         li.separator
-        li on-click("goto", "skills")
-          ---
-          <span.ion-flash/>
-          Skills
-          ---
-        li on-click("goto", "presets")
-          ---
-          <span.ion-levels/>
-          Presets
-          ---
+        li
+          router-link path="/skills"
+            ---
+            <span.ion-flash/>
+            Skills
+            ---
+        li
+          router-link path="/presets"
+            ---
+            <span.ion-levels/>
+            Presets
+            ---
         li.separator
-        li on-click("goto", "about")
-          ---
-          <span.ion-information-circled/>
-          About
-          ---
+        li
+          router-link path="/about"
+            ---
+            <span.ion-information-circled/>
+            About
+            ---
   div.main key="main"
-  router routes=state.routes initialRoute="/"
+    router routes=state.routes initialRoute="/"
